@@ -1,0 +1,4 @@
+include ':javax.mail'
+include ':additionnal'
+include ':activation'
+include ':app'
