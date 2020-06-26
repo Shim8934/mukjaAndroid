@@ -9,6 +9,6 @@
         android:layout_height="match_parent"
         android:text="첫번째 화면"
         android:textSize="30sp"
-        android:textColor="#ff0000"
+        android:textColor="#00ff00"
         android:gravity="center"/>
 </LinearLayout>

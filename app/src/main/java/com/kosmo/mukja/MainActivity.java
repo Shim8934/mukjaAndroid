@@ -1,29 +1,17 @@
 package com.kosmo.mukja;
 
-import android.Manifest;
-import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
-import com.kosmo.mukja.content.TabContent1;
 import com.kosmo.mukja.content.TabContent2;
+import com.kosmo.mukja.content.TabContent1;
 import com.kosmo.mukja.content.TabContent3;
+import com.naver.maps.map.MapFragment;
 
 import java.util.List;
 import java.util.Vector;
@@ -37,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FragmentManager fm = getSupportFragmentManager();
+        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
 
         //위젯 얻기]
         tabLayout = findViewById(R.id.tablayout);

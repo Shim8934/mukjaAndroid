@@ -17,7 +17,7 @@
 
         >
         <!-- 프래그먼트 전환용-->
-        <androidx.viewpager.widget.ViewPager
+        <com.kosmo.mukja.CustomViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/viewpager"/>

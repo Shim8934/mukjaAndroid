@@ -4,7 +4,7 @@ apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.shashank.platform.loginui"
+        applicationId "com.kosmo.mukja"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -25,6 +25,7 @@ android {
 }
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
@@ -32,6 +33,7 @@ dependencies {
     implementation project(path: ':additionnal')
     implementation project(path: ':javax.mail')
     implementation project(path: ':activation')
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
@@ -39,4 +41,12 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     implementation 'gun0912.ted:tedpermission:2.2.3'
+    implementation 'com.naver.maps:map-sdk:3.8.0'
+      implementation 'com.google.android.gms:play-services-location:16.0.0'
+
+
+    // butter knife
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
 }

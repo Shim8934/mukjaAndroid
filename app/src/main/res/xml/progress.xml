@@ -17,7 +17,7 @@
         android:layout_width="0dp"
         android:layout_weight="4"
         android:layout_height="wrap_content"
-        android:text="로그인 중입니다..."
+        android:text=""
         android:layout_gravity="center_vertical"
          />
 

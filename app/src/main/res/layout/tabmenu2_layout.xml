@@ -1,14 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+
+    <FrameLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="두번째 화면"
-        android:textSize="30sp"
-        android:textColor="#00ff00"
-        android:gravity="center"/>
-</LinearLayout>
+        >
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.naver.maps.map.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="7"
+                android:hint="동을 입력해주세요"
+                android:textColorHint="#C8C8C8"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:background="#ffffff"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/edit_addr"
+
+
+                />
+
+            <ImageButton
+                android:background="@drawable/search_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:id="@+id/btn_searchaddr"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:background="#E38730"
+            android:padding="1dp"
+            >
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/filter"
+                android:id="@+id/filter"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="필터"
+                android:background="#ffffff"
+                android:textColor="#000000"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="30dp"
+        android:text="이 위치에서 검색"
+        android:textColor="#ffffff"
+        android:background="@drawable/button_boder_radius"
+        android:id="@+id/btn_searcher"
+        android:textStyle="bold"
+
+        />
+
+
+    </FrameLayout>
+    <!-- Adding bottom sheet after main content -->
+    <FrameLayout
+        android:id="@+id/standardBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical"
+        >
+            <Button
+                android:id="@+id/btn_x"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/x"
+                android:layout_gravity="right"
+                />
+
+            <TextView
+                android:id="@+id/store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DEDEDE"/>
+
+            <TextView
+                android:id="@+id/store_addr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text=""
+                android:textSize="13dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                />
+
+            <TextView
+                android:id="@+id/store_intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16dp"
+                android:layout_marginLeft="25dp"
+                />
+            <TextView
+                android:id="@+id/store_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16dp"
+                android:layout_marginLeft="25dp"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="10dp">
+                <Button
+                    android:id="@+id/store_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:text="상세보기"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/button_boder_radius"
+                    android:textSize="16dp"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    />
+                <Button
+                    android:id="@+id/reatime_table_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:text="실시간 좌석확인"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:background="@drawable/button_boder_radius"
+                    android:textSize="16dp"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    />
+                <Button
+                    android:id="@+id/eroom_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:text="모임리스트"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:background="@drawable/button_boder_radius"
+                    android:textSize="16dp"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    />
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
