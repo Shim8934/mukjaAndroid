@@ -59,8 +59,6 @@ public class EroomlistActivity extends AppCompatActivity {
     private EroomAdapter eroomAdapter;
     private ArrayList<ERDTO> arrayList = new ArrayList<ERDTO>();
     private ERDTO erdto;
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

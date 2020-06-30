@@ -55,6 +55,18 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
+        <activity
+            android:name=".RealTimeTableInfo_Activity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+        <activity
+            android:name=".AddrList"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+
+
 
         <activity
             android:name=".fcm.StartActivity"
