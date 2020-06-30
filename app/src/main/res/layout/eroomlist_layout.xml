@@ -4,9 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="같이먹자 모임리스트"
+            android:textColor="#303030"
+            android:textSize="22dp"
+            android:layout_gravity="center"
+            android:id="@+id/filterText"
+            android:textStyle="bold"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+            <Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/x"
+                android:id="@+id/close_btn"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <ListView
-        android:id="@+id/list_message"
+        android:id="@+id/room_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -19,7 +53,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_creat"
+            android:id="@+id/creatRoom_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="채팅방 생성하기"

@@ -28,8 +28,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kosmo.mukja.AddrList;
+import com.kosmo.mukja.EroomlistActivity;
 import com.kosmo.mukja.FilterActivity;
 import com.kosmo.mukja.R;
+import com.kosmo.mukja.fcm.StartActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.LocationTrackingMode;
@@ -65,7 +67,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
     private FrameLayout bottom_sheet;
     private ImageButton btn_searchaddr;
     private EditText edit_addr;
-
+    private String store_id;
     private TextView store_name, store_addr,store_intro,store_time;
 
     private String[] check_avoid= {"FS","EG","MK","BD","PK","CW","PE","SF","DP","FL","SB"};
@@ -84,11 +86,6 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tabmenu2_layout,container,false);
-
-
-    }
-
         View view = inflater.inflate(R.layout.tabmenu2_layout,null,false);
 
         FragmentManager fm = getChildFragmentManager();
@@ -135,7 +132,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                     query +=mapkey+'='+prefer_codes.get(mapkey).toString()+"&";
                 }
                 Log.i("MyMarker",query);
-                new SearchMarkerAsyncTask().execute("http://192.168.0.3:8080/mukja/getMarker.pbs",bukdonglat,bukdonglng,namsualat,namsualng,query);
+                new SearchMarkerAsyncTask().execute("http://115.91.88.230:9998/mukja/getMarker.pbs",bukdonglat,bukdonglng,namsualat,namsualng,query);
             }
         });//searcher
 
@@ -161,6 +158,8 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
         edit_addr= view.findViewById(R.id.edit_addr);
 
 
+
+
         btn_searchaddr = view.findViewById(R.id.btn_searchaddr);
         btn_searchaddr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +169,20 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                 startActivityForResult(addrIntent,3000);
             }
         });
+
+        eroom_list=view.findViewById(R.id.eroom_list);
+        eroom_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent eroom = new Intent(context, EroomlistActivity.class);
+                eroom.putExtra("store_id",store_id);
+                startActivityForResult(eroom,3000);
+            }
+        });
+
+
+
+
         return view;
     }//oncerate
 
@@ -228,6 +241,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
 
         @Override
         protected void onPostExecute(String result) {
+            Log.i("MyMarker",result);
             if(markerList.size()!=0){
                 removeMarker(markerList);
             }
@@ -248,7 +262,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                     @Override
                     public boolean onClick(@NonNull Overlay overlay) {
                         sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-
+                        store_id =markerInfo.get("store_id").toString();
                         store_name.setText(markerInfo.get("store_name").toString().replaceAll("\"",""));
                         store_addr.setText(markerInfo.get("store_addr").toString().replaceAll("\"",""));
                         store_intro.setText(markerInfo.get("store_intro").toString().replaceAll("\"",""));

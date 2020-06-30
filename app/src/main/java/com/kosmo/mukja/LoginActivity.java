@@ -17,11 +17,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.kosmo.mukja.fcm.Users;
 
 import org.json.JSONObject;
 
@@ -29,6 +35,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -48,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText username;
     @BindView(R.id.password)
     EditText password;
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        //mDatabase = FirebaseDatabase.getInstance().getReference();
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,13 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         signIn.setOnClickListener(listener);
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//       });
+
 
 
 
@@ -96,6 +99,10 @@ public class LoginActivity extends AppCompatActivity {
                 .check();
     }
 
+
+
+
+
     //버튼 이벤트 처리]
     private View.OnClickListener listener=new View.OnClickListener() {
 
@@ -104,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
             Log.i("com.kosmo.mukja","username:"+username.getText().toString()+" password:"+password.getText().toString());
             new LoginAsyncTask().execute(
-                    "http://115.91.88.230:9998/mukja/member/json",username.getText().toString(),password.getText().toString());
+                    "http://115.91.88.230:9998/mukja/android/json",username.getText().toString(),password.getText().toString());
 
         }
     };//////////////////OnClickListener
@@ -163,11 +170,32 @@ public class LoginActivity extends AppCompatActivity {
             if(result !=null && result.length()!=0) {//회원인 경우
                 try {
                     JSONObject json = new JSONObject(result);
+
                     String username = json.getString("username");
                     Log.i("com.kosmo.mukja","username:"+username);
-                    //Intent intent = new Intent(LoginActivity.this);
-                    //intent.putExtra("username",username);
-                    //startActivity(intent);
+
+//                    Users member = new Users();
+//
+//
+//                    mDatabase.child("users").child("member").setValue(member)
+//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                @Override
+//                                public void onSuccess(Void aVoid) {
+//                                    // Write was successful!
+//                                    Toast.makeText(LoginActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
+//                                }
+//                            })
+//                            .addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    // Write failed
+//                                    Toast.makeText(LoginActivity.this, "저장을 실패했습니다.", Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    intent.putExtra("username",username);
+                    startActivity(intent);
                     //finish()불필요-NO_HISTORY로 설정했기때문에(매니페스트에서)
                     //아이디 비번저장
                     SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
@@ -187,6 +215,7 @@ public class LoginActivity extends AppCompatActivity {
             if(progressDialog!=null && progressDialog.isShowing())
                 progressDialog.dismiss();
         }
+
     }///////////////LoginAsyncTask
 
 }
