@@ -2,12 +2,16 @@ package com.kosmo.mukja;
 
 import android.os.Bundle;
 
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.tabs.TabLayout;
+import com.kosmo.mukja.content.TabContent1;
 import com.kosmo.mukja.content.TabContent2;
 import com.kosmo.mukja.content.TabContent1;
 import com.kosmo.mukja.content.TabContent3;
@@ -21,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private List<Fragment> fragments= new Vector<Fragment>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar actionBar = getSupportActionBar();
         FragmentManager fm = getSupportFragmentManager();
         MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
 
@@ -70,4 +76,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 }

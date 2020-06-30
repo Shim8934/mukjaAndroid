@@ -16,6 +16,8 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="h620a2wjb4" />
+        android:theme="@style/AppTheme">
+
         <activity
             android:name=".LoginActivity"
             android:configChanges="orientation|screenSize"
@@ -35,6 +37,8 @@
             android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -44,6 +48,8 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

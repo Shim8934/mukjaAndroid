@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        
+
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //버튼 이벤트 처리]
     private View.OnClickListener listener=new View.OnClickListener() {
-        
+
 
         @Override
         public void onClick(View v) {
@@ -165,9 +165,9 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject json = new JSONObject(result);
                     String username = json.getString("username");
                     Log.i("com.kosmo.mukja","username:"+username);
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    intent.putExtra("username",username);
-                    startActivity(intent);
+                    //Intent intent = new Intent(LoginActivity.this);
+                    //intent.putExtra("username",username);
+                    //startActivity(intent);
                     //finish()불필요-NO_HISTORY로 설정했기때문에(매니페스트에서)
                     //아이디 비번저장
                     SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
@@ -188,8 +188,6 @@ public class LoginActivity extends AppCompatActivity {
                 progressDialog.dismiss();
         }
     }///////////////LoginAsyncTask
-
-
 
 }
 

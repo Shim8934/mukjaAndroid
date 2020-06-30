@@ -84,6 +84,11 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.tabmenu2_layout,container,false);
+
+
+    }
+
         View view = inflater.inflate(R.layout.tabmenu2_layout,null,false);
 
         FragmentManager fm = getChildFragmentManager();
