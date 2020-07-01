@@ -15,6 +15,7 @@ import com.kosmo.mukja.content.TabContent1;
 import com.kosmo.mukja.content.TabContent2;
 import com.kosmo.mukja.content.TabContent1;
 import com.kosmo.mukja.content.TabContent3;
+import com.kosmo.mukja.content.TabContent4;
 import com.naver.maps.map.MapFragment;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_home).setText("홈"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_search_x).setText("식당검색"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage).setText("마이페이지"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.web_crawler).setText("크롤링"));
         //Fragment 생성후 컬렉션에 저장
         TabContent1 tabContent1= new TabContent1();
         fragments.add(tabContent1);
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(tabContent2);
         TabContent3 tabContent3= new TabContent3();
         fragments.add(tabContent3);
+        TabContent4 tabContent4= new TabContent4();
+        fragments.add(tabContent4);
         //뷰 페이저를 관리하는 PageAdapter를 생성
         MyPagerAdapter myPagerAdapter= new MyPagerAdapter(getSupportFragmentManager(),fragments);
         //ViewPager에 PageAdapter를 연결

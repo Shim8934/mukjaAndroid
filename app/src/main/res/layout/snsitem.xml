@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="15dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            >
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="#EAEAEA"
+                android:id="@+id/img_snsProfile"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인스타그램 아이디 위치"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:id="@+id/tv_snsId"
+                android:layout_marginLeft="10dp"
+                android:textColor="#646464"
+                ></TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="420dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EAEAEA"
+            android:id="@+id/img_snsContent"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="컨탠츠 내용이 들어가는 자리입니다"
+        android:textSize="15dp"
+        android:layout_margin="10dp"
+        android:id="@+id/tv_snsRe"
+        android:textColor="#646464"
+        />
+
+
+
+</LinearLayout>
