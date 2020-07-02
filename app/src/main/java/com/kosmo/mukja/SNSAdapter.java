@@ -13,11 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
 public class SNSAdapter extends BaseAdapter {
-
     private ArrayList<SNSItem> mItems = new ArrayList<>();
     @Override
     public int getCount() {

@@ -50,11 +50,6 @@ public class NEFilter extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK, intent);
-                Log.i("가즈아",""+RESULT_OK);
-                Log.i("가즈아",""+intent);
-                Log.i("가즈아","쿼리보내기전 :"+avoid_codes.get("BD")+"/"+avoid_codes.get("CW")+"/"+avoid_codes.get("DP")+"/"+avoid_codes.get("EG")+"/"+avoid_codes.get("FL")
-                        +"/"+avoid_codes.get("MK")+"/"+avoid_codes.get("PE")+"/"+avoid_codes.get("PK")+"/"+avoid_codes.get("SB")+"/"+avoid_codes.get("SF"));
-
                 finish();
             }
         });//close1

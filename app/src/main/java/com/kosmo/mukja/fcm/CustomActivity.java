@@ -54,12 +54,11 @@ public class CustomActivity extends AppCompatActivity {
         int dd = Integer.parseInt(ds.format(currentTime));
         int HH = Integer.parseInt(Hs.format(currentTime));
         int mm = Integer.parseInt(ms.format(currentTime));
-        Log.i("가즈아",(HH+9)+"시"+mm+"분");
+        Log.i("가즈아", (HH + 9) + "시" + mm + "분");
         horizontalCounter = findViewById(R.id.horizontal_counter);
         datePicker = findViewById(R.id.datepicker);
         timePicker = findViewById(R.id.timepicker);
-        filters = findViewById(R.id.filters);
-
+        //filters = findViewById(R.id.filters);
 
 
         //클릭 리스너 셋팅 (클릭버튼이 동작하도록 만들어줌.)
@@ -73,7 +72,7 @@ public class CustomActivity extends AppCompatActivity {
             datePicker.setText(yyyy + "년" + MM + "월" + dd + "일");
         }
         if (timePicker.getText() == "") {
-            timePicker.setText((HH+9)+"시"+mm+"분");
+            timePicker.setText((HH + 9) + "시" + mm + "분");
         }
 
         datePicker.setOnClickListener(new View.OnClickListener() {
@@ -89,41 +88,32 @@ public class CustomActivity extends AppCompatActivity {
                 TimePickerDialog dialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        timePicker.setText(hourOfDay+"시"+minute+"분");
+                        timePicker.setText(hourOfDay + "시" + minute + "분");
                     }
-                },(HH+9),mm,true);
+                }, (HH + 9), mm, true);
                 dialog.show();
             }
         });
-
-
-        filters.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, NEFilter.class);
-                Log.i("가즈아","가기전 기피코드"+avoid_codes.size());
-                intent.putExtra("avoid_codes",avoid_codes);
-                startActivityForResult(intent,3000);
-            }
-        });//filter
+//        filters.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, NEFilter.class);
+//                intent.putExtra("avoid_codes", avoid_codes);
+//                startActivityForResult(intent, 3000);
+//            }
+//        });//filter
 
     }//onCreat
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i("가즈아", "" + requestCode);
-        Log.i("가즈아", "" + resultCode);
-        Log.i("가즈아", "" + data);
-
         if (resultCode == -1) {
-            Log.i("가즈아", "들어왔냐?");
             this.avoid_codes = data.getBundleExtra("avoid_codes");
-            Log.i("가즈아", avoid_codes.get("BD") + "/" + avoid_codes.get("CW") + "/" + avoid_codes.get("DP") + "/" + avoid_codes.get("EG") + "/" + avoid_codes.get("FL")
-                    + "/" + avoid_codes.get("MK") + "/" + avoid_codes.get("PE") + "/" + avoid_codes.get("PK") + "/" + avoid_codes.get("SB") + "/" + avoid_codes.get("SF"));
 
         }
     }
+
     private DatePickerDialog.OnDateSetListener datelistener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

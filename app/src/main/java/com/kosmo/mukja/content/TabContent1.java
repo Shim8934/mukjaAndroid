@@ -5,6 +5,9 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 
@@ -38,7 +42,7 @@ public class TabContent1 extends Fragment {
     private Context context;
     private TextView datePicker;
     private TextView timePicker;
-    private TextView filters;
+   // private TextView filters;
 
     Bundle avoid_codes = new Bundle();
     @Override
@@ -66,7 +70,7 @@ public class TabContent1 extends Fragment {
         horizontalCounter = view.findViewById(R.id.horizontal_counter);
         datePicker = view.findViewById(R.id.datepicker);
         timePicker = view.findViewById(R.id.timepicker);
-        filters = view.findViewById(R.id.filters);
+        //filters = view.findViewById(R.id.filters);
 
 
 
@@ -105,30 +109,33 @@ public class TabContent1 extends Fragment {
         });
 
 
-        filters.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, NEFilter.class);
-                Log.i("가즈아","가기전 기피코드"+avoid_codes.size());
-                intent.putExtra("avoid_codes",avoid_codes);
-                startActivityForResult(intent,3000);
-            }
-        });//filter
+//        filters.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, NEFilter.class);
+//                intent.putExtra("avoid_codes", avoid_codes);
+//                startActivityForResult(intent,3000);
+//            }
+//        });//filter
 
         return view;
     }//onCreat
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("가즈아",""+requestCode);
-        Log.i("가즈아",""+resultCode);
-        Log.i("가즈아",""+data);
-
         if(resultCode == -1){
-            Log.i("가즈아","들어왔냐?");
             this.avoid_codes = data.getBundleExtra("avoid_codes");
-            Log.i("가즈아",avoid_codes.get("BD")+"/"+avoid_codes.get("CW")+"/"+avoid_codes.get("DP")+"/"+avoid_codes.get("EG")+"/"+avoid_codes.get("FL")
-                    +"/"+avoid_codes.get("MK")+"/"+avoid_codes.get("PE")+"/"+avoid_codes.get("PK")+"/"+avoid_codes.get("SB")+"/"+avoid_codes.get("SF"));
+
+            String NoE = avoid_codes.get("BD")+"/"+avoid_codes.get("CW")+"/"+avoid_codes.get("DP")+"/"+avoid_codes.get("EG")+"/"+avoid_codes.get("FL")
+                    +"/"+avoid_codes.get("MK")+"/"+avoid_codes.get("PE")+"/"+avoid_codes.get("PK")+"/"+avoid_codes.get("SB")+"/"+avoid_codes.get("SF");
+            NoE =NoE.replaceAll("/null","");
+            NoE =NoE.replaceAll("null","");
+
+            if(NoE.equals("BD")){
+
+            }
+
+            //filters.setText(NoE);
 
         }
 
