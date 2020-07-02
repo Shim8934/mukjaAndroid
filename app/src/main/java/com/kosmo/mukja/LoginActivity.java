@@ -203,6 +203,9 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("username",json.getString("username"));
                     editor.putString("password",json.getString("password"));
                     editor.commit();
+
+                    Log.i("MyMarker","로그인시 아이디:"+preferences.getString("username","defaultID"));
+
                 }
                 catch(Exception e){e.printStackTrace();}
 

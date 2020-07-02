@@ -32,6 +32,7 @@ import com.kosmo.mukja.AddrList;
 import com.kosmo.mukja.FilterActivity;
 import com.kosmo.mukja.R;
 import com.kosmo.mukja.RealTimeTableInfo_Activity;
+import com.kosmo.mukja.Store_infoActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraAnimation;
@@ -189,7 +190,16 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
 
 
 
+        store_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent store_info_intent = new Intent(context, Store_infoActivity.class);
 
+                store_info_intent.putExtra("store_id",store_id);
+                Log.i("MyMarker","스토어 인포가기전 store_id:"+store_id);
+                startActivityForResult(store_info_intent,3000);
+            }
+        });
         return view;
     }//oncerate
 

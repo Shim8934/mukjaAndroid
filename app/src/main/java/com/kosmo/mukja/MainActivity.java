@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage).setText("마이페이지"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.web_crawler).setText("크롤링"));
         //Fragment 생성후 컬렉션에 저장
-        //ㅎㅇㅎㅇ
+
         TabContent1 tabContent1= new TabContent1();
         fragments.add(tabContent1);
         TabContent2 tabContent2= new TabContent2();

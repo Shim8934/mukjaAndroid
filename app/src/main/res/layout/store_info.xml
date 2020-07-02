@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/store_close"
+                android:layout_width="10dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center"
+                android:background="@drawable/pngegg" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:text=""
+                android:textColor="#616161"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:id="@+id/tv_name"
+                android:layout_marginLeft="50dp"
+                />
+        </LinearLayout>
+
+        <pyxis.uzuki.live.rollingbanner.RollingBanner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginBottom="20dp"
+            app:bottomMargin="@dimen/default_bottom_margin"
+            app:enableIndicator="true"
+            app:enableLooping="true"
+            app:enableRolling="true"
+            app:flingAble="true"
+            app:indicatorMargin="@dimen/default_indicator_margin"
+            app:indicatorRes="@drawable/default_indicator"
+            app:rollingDelay="3000"
+            app:scrollingDelay="250"
+            app:smoothScroll="true" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testIMG"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="기본 정보"
+            android:textSize="20dp"
+            android:textColor="#646464"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            >
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="25dp"
+                android:background="@drawable/addr_icon"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_addr"
+                android:textSize="14dp"
+                android:text=""
+                android:textColor="#A6A6A6"
+                android:layout_marginLeft="10dp"
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ph_icon"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_ph"
+                android:text=""
+                android:textSize="14dp"
+                android:textColor="#A6A6A6"
+                android:layout_marginLeft="10dp"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:background="@drawable/email_icon"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_email"
+                android:text=""
+                android:textSize="14dp"
+                android:textColor="#A6A6A6"
+                android:layout_marginLeft="10dp"
+
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            >
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/time_icon"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_time"
+                android:text=""
+                android:textSize="14dp"
+                android:textColor="#A6A6A6"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            >
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/intro_icon"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_intro"
+                android:text=""
+                android:textSize="14dp"
+                android:textColor="#A6A6A6"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="#ECECEC"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="평점 및 추천"
+            android:textSize="20dp"
+            android:textColor="#646464"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="top"
+            >
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="3"
+            android:stepSize="1"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/rating_store"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            />
+
+            <ToggleButton
+                android:id="@+id/likeToggle"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_gravity="top"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/andorid_thumb_b"
+                android:text="ToggleButton"
+                android:textOff=" "
+                android:textOn=" "
+
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="#ECECEC"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="메뉴"
+            android:textSize="20dp"
+            android:textColor="#646464"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"/>
+
+        <ListView
+            android:id="@+id/store_menu_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentStart="true">
+        </ListView>
+
+    </LinearLayout>
+
+</ScrollView>
