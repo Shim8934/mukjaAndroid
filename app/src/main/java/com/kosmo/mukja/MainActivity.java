@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_search_x).setText("식당검색"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage).setText("마이페이지"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.web_crawler).setText("크롤링"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage).setText("페이지 5"));
         //Fragment 생성후 컬렉션에 저장
 
         TabContent1 tabContent1= new TabContent1();
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(tabContent3);
         TabContent4 tabContent4= new TabContent4();
         fragments.add(tabContent4);
+        TabContent5 tabContent5= new TabContent5();
+        fragments.add(tabContent5);
         //뷰 페이저를 관리하는 PageAdapter를 생성
         MyPagerAdapter myPagerAdapter= new MyPagerAdapter(getSupportFragmentManager(),fragments);
         //ViewPager에 PageAdapter를 연결

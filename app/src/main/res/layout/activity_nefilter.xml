@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="필터 페이지"
+            android:text="안 먹을 재료를 선택하세요"
             android:textColor="#303030"
             android:textSize="22dp"
             android:layout_gravity="center"
@@ -46,139 +46,6 @@
     </LinearLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="10dp"
-        android:text="선호" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            >
-            <ToggleButton
-                android:id="@+id/btnK"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:textOn=""
-                android:textOff=""
-                android:checked="true"
-                android:layout_margin="5dp"
-
-                android:text="ToggleButton"
-                android:background="@drawable/k_c"
-                />
-            <ToggleButton
-                android:id="@+id/btnC"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:textOn=""
-                android:textOff=""
-                android:checked="true"
-                android:layout_margin="5dp"
-
-                android:text="ToggleButton"
-                android:background="@drawable/chi_c"
-                />
-            <ToggleButton
-                android:id="@+id/btnY"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:textOn=""
-                android:textOff=""
-                android:checked="true"
-                android:layout_margin="5dp"
-
-                android:text="ToggleButton"
-                android:background="@drawable/y_c"
-                />
-            <ToggleButton
-                android:id="@+id/btnB"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:textOn=""
-                android:textOff=""
-                android:checked="true"
-                android:layout_margin="5dp"
-
-                android:text="ToggleButton"
-                android:background="@drawable/bs_c"
-                />
-            <ToggleButton
-                android:id="@+id/btnJ"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:textOn=""
-                android:textOff=""
-                android:checked="true"
-                android:layout_margin="5dp"
-
-                android:text="ToggleButton"
-                android:background="@drawable/j_c"
-                />
-        </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="한식"
-            android:layout_marginLeft="27dp"
-            android:layout_marginRight="27dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="중식"
-            android:layout_marginLeft="27dp"
-            android:layout_marginRight="27dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="양식"
-            android:layout_marginLeft="27dp"
-            android:layout_marginRight="27dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="분식"
-            android:layout_marginLeft="27dp"
-            android:layout_marginRight="27dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="일식"
-            android:layout_marginLeft="27dp"
-            android:layout_marginRight="27dp"
-            />
-    </LinearLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#F3F3F3"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비선호"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="10dp"
-        />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -192,7 +59,6 @@
             android:layout_height="70dp"
             android:textOn=""
             android:textOff=""
-            android:checked="true"
             android:layout_margin="5dp"
             android:background="@drawable/db_b"
             />

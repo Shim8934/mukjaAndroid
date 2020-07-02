@@ -1,5 +1,6 @@
-package com.kosmo.mukja;
+package com.kosmo.mukja.fcm;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,36 +10,20 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.kosmo.mukja.fcm.ERDTO;
-import com.naver.maps.geometry.LatLng;
-import com.naver.maps.map.overlay.Marker;
-import com.naver.maps.map.overlay.Overlay;
-import com.naver.maps.map.overlay.OverlayImage;
+import com.kosmo.mukja.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -60,12 +45,14 @@ public class EroomlistActivity extends AppCompatActivity {
     private ArrayList<ERDTO> arrayList = new ArrayList<ERDTO>();
     private ERDTO erdto;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.eroomlist_layout);
+        setContentView(R.layout.activitiy_eroom_list);
         ButterKnife.bind(this);
         EroomAsyncTask asyncTask = new EroomAsyncTask();
         asyncTask.execute();
@@ -132,15 +119,14 @@ public class EroomlistActivity extends AppCompatActivity {
                 }
                 showChatList();
             }
-
-
-
         }
 
     }///////////////AsyncTask
     private void showChatList() {
         // 리스트 어댑터 생성 및 세팅
-        eroomAdapter = new EroomAdapter(getApplicationContext(), arrayList);
+        eroomAdapter = new EroomAdapter((Activity)EroomlistActivity.this, arrayList);
         room_list.setAdapter(eroomAdapter);
     }
+
+
 }//EroomlistActivity.class

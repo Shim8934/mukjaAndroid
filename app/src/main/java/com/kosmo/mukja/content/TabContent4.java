@@ -114,7 +114,7 @@ public class TabContent4 extends Fragment {
 
 
 
-           try {
+            try {
                 URL url = new URL(String.format("%s",params[0]));
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
                 //서버에 요청 및 응답코드 받기
@@ -158,13 +158,13 @@ public class TabContent4 extends Fragment {
 
         Log.i("MyMarker","dataSetting json"+sns.toString());
 
-     SNSAdapter adapter_SNS = new SNSAdapter();
+        SNSAdapter adapter_SNS = new SNSAdapter();
 
         for (int i=0; i<snsLength; i++) {
             snsProfile=sns.getAsJsonObject(String.valueOf(i)).getAsJsonObject().get("profile").getAsString();
 
             snsId=sns.getAsJsonObject(String.valueOf(i)).getAsJsonObject().get("id").getAsString();
-           snsContent=sns.getAsJsonObject(String.valueOf(i)).getAsJsonObject().get("img").getAsString();
+            snsContent=sns.getAsJsonObject(String.valueOf(i)).getAsJsonObject().get("img").getAsString();
 
             snsRe=sns.getAsJsonObject(String.valueOf(i)).getAsJsonObject().get("tags").getAsString().replaceAll("<div class=\\\"snsContent\\\">","\r\n\n").replaceAll("</div>"," ");
             Log.i("MyMarker","snsProfile"+snsProfile);

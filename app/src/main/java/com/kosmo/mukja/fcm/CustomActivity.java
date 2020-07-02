@@ -1,38 +1,34 @@
-package com.kosmo.mukja.content;
+package com.kosmo.mukja.fcm;
 
-
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gildaswise.horizontalcounter.HorizontalCounter;
 import com.kosmo.mukja.R;
-import com.kosmo.mukja.fcm.NEFilter;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+public class CustomActivity extends AppCompatActivity {
 
-//1]Fragement상속
-//※androidx.fragment.app.Fragment 상속
-public class TabContent1 extends Fragment {
+    private View.OnClickListener mPositiveListener;
+    private View.OnClickListener mNegativeListener;
 
     private HorizontalCounter horizontalCounter;
     private Context context;
@@ -41,15 +37,11 @@ public class TabContent1 extends Fragment {
     private TextView filters;
 
     Bundle avoid_codes = new Bundle();
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        this.context = context;
-    }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.custom_dialog, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.custom_dialog);
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat ys = new SimpleDateFormat("yyyy", Locale.getDefault());
         SimpleDateFormat Ms = new SimpleDateFormat("MM", Locale.getDefault());
@@ -63,10 +55,10 @@ public class TabContent1 extends Fragment {
         int HH = Integer.parseInt(Hs.format(currentTime));
         int mm = Integer.parseInt(ms.format(currentTime));
         Log.i("가즈아",(HH+9)+"시"+mm+"분");
-        horizontalCounter = view.findViewById(R.id.horizontal_counter);
-        datePicker = view.findViewById(R.id.datepicker);
-        timePicker = view.findViewById(R.id.timepicker);
-        filters = view.findViewById(R.id.filters);
+        horizontalCounter = findViewById(R.id.horizontal_counter);
+        datePicker = findViewById(R.id.datepicker);
+        timePicker = findViewById(R.id.timepicker);
+        filters = findViewById(R.id.filters);
 
 
 
@@ -115,23 +107,22 @@ public class TabContent1 extends Fragment {
             }
         });//filter
 
-        return view;
     }//onCreat
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("가즈아",""+requestCode);
-        Log.i("가즈아",""+resultCode);
-        Log.i("가즈아",""+data);
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("가즈아", "" + requestCode);
+        Log.i("가즈아", "" + resultCode);
+        Log.i("가즈아", "" + data);
 
-        if(resultCode == -1){
-            Log.i("가즈아","들어왔냐?");
+        if (resultCode == -1) {
+            Log.i("가즈아", "들어왔냐?");
             this.avoid_codes = data.getBundleExtra("avoid_codes");
-            Log.i("가즈아",avoid_codes.get("BD")+"/"+avoid_codes.get("CW")+"/"+avoid_codes.get("DP")+"/"+avoid_codes.get("EG")+"/"+avoid_codes.get("FL")
-                    +"/"+avoid_codes.get("MK")+"/"+avoid_codes.get("PE")+"/"+avoid_codes.get("PK")+"/"+avoid_codes.get("SB")+"/"+avoid_codes.get("SF"));
+            Log.i("가즈아", avoid_codes.get("BD") + "/" + avoid_codes.get("CW") + "/" + avoid_codes.get("DP") + "/" + avoid_codes.get("EG") + "/" + avoid_codes.get("FL")
+                    + "/" + avoid_codes.get("MK") + "/" + avoid_codes.get("PE") + "/" + avoid_codes.get("PK") + "/" + avoid_codes.get("SB") + "/" + avoid_codes.get("SF"));
 
         }
-
     }
     private DatePickerDialog.OnDateSetListener datelistener = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -143,7 +134,3 @@ public class TabContent1 extends Fragment {
 
 
 }
-
-
-
-

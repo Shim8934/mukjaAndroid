@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:orientation="horizontal"
+        android:background="@drawable/testt"
+        >
+        <TextView
+            android:id="@+id/filterText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="같이먹자 모임 생성하기"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:textColor="#303030"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right">
+            <Button
+                android:id="@+id/close_btn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/close"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="0.6"
+       android:background="@drawable/testt"
+       android:orientation="horizontal"
+       >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:text="제목:"
+            android:textColor="@android:color/black"
+            android:gravity="center|right"
+            android:textSize="20dp"
+            >
+        </TextView>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:background="@null"
+            android:hint=" 제목을 입력해주세요(20자)"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:textSize="18dp"
+            ></EditText>
+
+   </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@drawable/testt"
+        android:layout_marginTop="-1dp"
+        android:paddingTop="10dp"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:text="내용:"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:gravity="right"
+            >
+        </TextView>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:background="@null"
+            android:gravity="top"
+            android:hint=" 내용을 입력해주세요(50자)"
+            android:maxLength="50"
+            >
+
+        </EditText>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:background="@drawable/testt"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="최대인원:"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            >
+        </TextView>
+        <com.gildaswise.horizontalcounter.HorizontalCounter
+            android:id="@+id/horizontal_counter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            app:stepValue="1"
+            app:textColor="#009688"
+            app:textSize="10dp"
+            app:minusButtonColor="#F44336"
+            app:plusButtonColor="#2196F3"
+            app:displayAsInteger="true"
+            app:initialValue="1"
+            app:maxValue="100"
+            app:minValue="0" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/testt"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="모 임 일:"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:id="@+id/datepicker"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/testt"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="모 임 시 간:"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:id="@+id/timepicker"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:gravity="center"
+            />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/testt"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="기피재료:"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:id="@+id/filters"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:gravity="center"
+            />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/darker_gray"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/creatRoom_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="채팅방 생성하기"
+            />
+    </LinearLayout>
+</LinearLayout>
+
+

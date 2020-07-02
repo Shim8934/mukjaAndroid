@@ -45,7 +45,7 @@
         </activity>
         <!--모임리스트-->
         <activity
-            android:name=".EroomlistActivity"
+            android:name=".fcm.EroomlistActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
@@ -69,6 +69,12 @@
 
 
         <activity
+            android:name=".fcm.CustomActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+
+        <activity
         android:name=".fcm.StartActivity"
         android:configChanges="orientation|screenSize"
         android:windowSoftInputMode="stateHidden|adjustPan">
@@ -78,6 +84,12 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
+        <activity
+            android:name=".fcm.NEFilter"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+
 
         <service
             android:name=".fcm.FirebaseInstanceIDService"

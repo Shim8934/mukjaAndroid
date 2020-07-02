@@ -29,8 +29,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kosmo.mukja.AddrList;
+
 import com.kosmo.mukja.FilterActivity;
 import com.kosmo.mukja.R;
+import com.kosmo.mukja.fcm.EroomlistActivity;
 import com.kosmo.mukja.RealTimeTableInfo_Activity;
 import com.kosmo.mukja.Store_infoActivity;
 import com.naver.maps.geometry.LatLng;
@@ -70,7 +72,6 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
     private FrameLayout bottom_sheet;
     private ImageButton btn_searchaddr;
     private EditText edit_addr;
-
     private TextView store_name, store_addr,store_intro,store_time;
 
     private String[] check_avoid= {"FS","EG","MK","BD","PK","CW","PE","SF","DP","FL","SB"};
@@ -78,11 +79,8 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
     private String query;
     private Bundle avoid_codes = new Bundle();
     private Bundle prefer_codes = new Bundle();
-
     private String store_id;
-
     public static final String ipAddr="192.168.0.6";
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -139,17 +137,15 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                     query +=mapkey+'='+prefer_codes.get(mapkey).toString()+"&";
                 }
                 Log.i("MyMarker",query);
-                new SearchMarkerAsyncTask().execute("http://"+ipAddr+":8080/mukja/getMarker.pbs",bukdonglat,bukdonglng,namsualat,namsualng,query);
+                new SearchMarkerAsyncTask().execute("http://115.91.88.230:9998/mukja/getMarker.pbs",bukdonglat,bukdonglng,namsualat,namsualng,query);
             }
         });//searcher
 
         bottom_sheet = view.findViewById(R.id.standardBottomSheet);
         sheetBehavior = BottomSheetBehavior.from(bottom_sheet);
-
         store_info= view.findViewById(R.id.store_info);
         reatime_table_info = view.findViewById(R.id.reatime_table_info);
         eroom_list = view.findViewById(R.id.eroom_list);
-
         store_name = view.findViewById(R.id.store_name);
         store_addr = view.findViewById(R.id.store_addr);
         store_intro = view.findViewById(R.id.store_intro);
@@ -188,6 +184,15 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
             }
         });
 
+        eroom_list=view.findViewById(R.id.eroom_list);
+        eroom_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent eroom = new Intent(context,EroomlistActivity.class);
+                eroom.putExtra("store_id",store_id);
+                startActivityForResult(eroom,3000);
+            }
+        });
 
 
         store_info.setOnClickListener(new View.OnClickListener() {
