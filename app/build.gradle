@@ -66,6 +66,6 @@ dependencies {
 
     // support library
     implementation 'com.github.WindSekirun:RollingBanner:1.0.7'
-
+    //ㄴㅇㄹㄴㅇㄹ\\
 
 }

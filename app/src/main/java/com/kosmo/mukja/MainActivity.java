@@ -16,6 +16,7 @@ import com.kosmo.mukja.content.TabContent2;
 import com.kosmo.mukja.content.TabContent1;
 import com.kosmo.mukja.content.TabContent3;
 import com.kosmo.mukja.content.TabContent4;
+import com.kosmo.mukja.content.TabContent5;
 import com.naver.maps.map.MapFragment;
 
 import java.util.List;
