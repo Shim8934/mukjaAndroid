@@ -28,10 +28,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kosmo.mukja.AddrList;
-import com.kosmo.mukja.EroomlistActivity;
+
 import com.kosmo.mukja.FilterActivity;
 import com.kosmo.mukja.R;
-import com.kosmo.mukja.fcm.StartActivity;
+import com.kosmo.mukja.fcm.EroomlistActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.LocationTrackingMode;
@@ -174,7 +174,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
         eroom_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent eroom = new Intent(context, EroomlistActivity.class);
+                Intent eroom = new Intent(context,EroomlistActivity.class);
                 eroom.putExtra("store_id",store_id);
                 startActivityForResult(eroom,3000);
             }
