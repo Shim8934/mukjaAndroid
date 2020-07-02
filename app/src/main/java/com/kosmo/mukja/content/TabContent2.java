@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,8 +33,11 @@ import com.kosmo.mukja.AddrList;
 import com.kosmo.mukja.FilterActivity;
 import com.kosmo.mukja.R;
 import com.kosmo.mukja.fcm.EroomlistActivity;
+import com.kosmo.mukja.RealTimeTableInfo_Activity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
+import com.naver.maps.map.CameraAnimation;
+import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
@@ -67,7 +71,6 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
     private FrameLayout bottom_sheet;
     private ImageButton btn_searchaddr;
     private EditText edit_addr;
-    private String store_id;
     private TextView store_name, store_addr,store_intro,store_time;
 
     private String[] check_avoid= {"FS","EG","MK","BD","PK","CW","PE","SF","DP","FL","SB"};
@@ -75,7 +78,8 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
     private String query;
     private Bundle avoid_codes = new Bundle();
     private Bundle prefer_codes = new Bundle();
-
+    private String store_id;
+    public static final String ipAddr="192.168.0.6";
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -98,9 +102,9 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                 prefer_codes.putString(item, item);
             }
         }
-        Log.i("MyMarker",prefer_codes.get("CS")+"/"+prefer_codes.get("JS")+"/"+prefer_codes.get("HS")+"/"+prefer_codes.get("BS")+"/"+prefer_codes.get("YS"));
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+        Log.i("MyMarker",prefer_codes.get("CS")+"/"+prefer_codes.get("JS")+"/"+prefer_codes.get("HS")+"/"+prefer_codes.get("BS")+"/"+prefer_codes.get("YS"));
 
 
         filter = view.findViewById(R.id.filter);
@@ -138,11 +142,9 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
 
         bottom_sheet = view.findViewById(R.id.standardBottomSheet);
         sheetBehavior = BottomSheetBehavior.from(bottom_sheet);
-
         store_info= view.findViewById(R.id.store_info);
         reatime_table_info = view.findViewById(R.id.reatime_table_info);
         eroom_list = view.findViewById(R.id.eroom_list);
-
         store_name = view.findViewById(R.id.store_name);
         store_addr = view.findViewById(R.id.store_addr);
         store_intro = view.findViewById(R.id.store_intro);
@@ -155,18 +157,29 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                 sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
+
         edit_addr= view.findViewById(R.id.edit_addr);
-
-
-
-
         btn_searchaddr = view.findViewById(R.id.btn_searchaddr);
         btn_searchaddr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(edit_addr.getText().toString().trim().equals("")){
+                    Toast.makeText(context, "검색어를 입력하세요!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent addrIntent = new Intent(context, AddrList.class);
                 addrIntent.putExtra("search_text",edit_addr.getText().toString().trim());
+
                 startActivityForResult(addrIntent,3000);
+            }
+        });
+
+        reatime_table_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent realtim_intent = new Intent(context, RealTimeTableInfo_Activity.class);
+                realtim_intent.putExtra("store_id",store_id);
+                startActivityForResult(realtim_intent,3000);
             }
         });
 
@@ -179,9 +192,6 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                 startActivityForResult(eroom,3000);
             }
         });
-
-
-
 
         return view;
     }//oncerate
@@ -241,7 +251,6 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.i("MyMarker",result);
             if(markerList.size()!=0){
                 removeMarker(markerList);
             }
@@ -262,7 +271,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                     @Override
                     public boolean onClick(@NonNull Overlay overlay) {
                         sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                        store_id =markerInfo.get("store_id").toString();
+                        store_id=markerInfo.get("store_id").toString();
                         store_name.setText(markerInfo.get("store_name").toString().replaceAll("\"",""));
                         store_addr.setText(markerInfo.get("store_addr").toString().replaceAll("\"",""));
                         store_intro.setText(markerInfo.get("store_intro").toString().replaceAll("\"",""));
@@ -330,6 +339,8 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
 
         naverMap.setLocationSource(locationSource);
 
+
+
     }
 
     private void removeMarker(List markerList){
@@ -340,15 +351,28 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("MyMarker","resultCode"+resultCode);
+        Log.i("MyMarker","resultCode:"+resultCode);
         if(resultCode == -1){
             this.avoid_codes = data.getBundleExtra("avoid_codes");
-
+            Log.i("MyMarker","resultCode"+resultCode);
             this.prefer_codes = data.getBundleExtra("prefer_codes");
             Log.i("MyMarker",prefer_codes.get("CS")+"/"+prefer_codes.get("JS")+"/"+prefer_codes.get("HS")+"/"+prefer_codes.get("BS")+"/"+prefer_codes.get("YS"));
             Log.i("MyMarker",avoid_codes.get("BD")+"/"+avoid_codes.get("CW")+"/"+avoid_codes.get("DP")+"/"+avoid_codes.get("EG")+"/"+avoid_codes.get("FL")
                     +"/"+avoid_codes.get("MK")+"/"+avoid_codes.get("PE")+"/"+avoid_codes.get("PK")+"/"+avoid_codes.get("SB")+"/"+avoid_codes.get("SF"));
 
+        }else if(resultCode == 1){
+            Log.i("MyMarker","resultCode:"+resultCode);
+            Log.i("MyMarker","data:"+data);
+            if(data==null){
+                return;
+            }
+            Double lat= data.getDoubleExtra("lat", 10.1234567);
+            Double lng= data.getDoubleExtra("lng", 100.1234567);
+            Log.i("MyMarker","lat:"+lat+" lng:"+lng);
+
+            CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(lat, lng))
+                    .animate(CameraAnimation.Easing);
+            naverMap.moveCamera(cameraUpdate);
         }
     }
 

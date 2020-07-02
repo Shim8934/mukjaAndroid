@@ -4,7 +4,10 @@ package com.kosmo.mukja.content;
 
 import android.content.Context;
 
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.os.SystemClock;
@@ -14,15 +17,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kosmo.mukja.R;
+import com.kosmo.mukja.SNSAdapter;
+import com.kosmo.mukja.SNSItem;
 
 
 import java.io.BufferedReader;
@@ -34,11 +44,12 @@ import java.net.URL;
 //1]Fragement상속
 //※androidx.fragment.app.Fragment 상속
 public class TabContent4 extends Fragment {
-    private Context context;
+    public static Context context;
+    private ListView listView_sns;
 
 
     private static final String TAG = "TestActivity";
-    private Button btn_sns;
+    private ImageButton btn_sns;
     private EditText edit_sns;
     //2]onCreateView()오버 라이딩
     @Nullable
@@ -49,16 +60,31 @@ public class TabContent4 extends Fragment {
         btn_sns = view.findViewById(R.id.btn_sns);
         edit_sns = view.findViewById(R.id.edit_sns);
 
+        ImageView snsProfile= view.findViewById(R.id.exProfile);
+        LinearLayout previewSNS = view.findViewById(R.id.previewSNS);
+
+
+        snsProfile.setBackground(new ShapeDrawable(new OvalShape()));
+        if(Build.VERSION.SDK_INT >= 21) {
+            snsProfile.setClipToOutline(true);
+        }
+
         btn_sns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("MyMarker","버튼클릭!");
                 Log.i("MyMarker","입력된 내용:"+edit_sns.getText().toString());
                 SearchSNS searchSNS=  new SearchSNS();
-                searchSNS.execute("http://f2cd15e7bc7b.ngrok.io/flask?searchVal="+edit_sns.getText().toString());
+                searchSNS.execute("http://192.168.0.6:9876/flask?searchVal="+edit_sns.getText().toString());
+                previewSNS.setVisibility(View.GONE);
             }
         });
         // 웹 서버로 데이터 전송
+
+
+        listView_sns = view.findViewById(R.id.snslistView);
+
+
         return view;
 
     }
@@ -113,15 +139,41 @@ public class TabContent4 extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.i("MyMarker","result:"+result);
             JsonParser jsonParser = new JsonParser();
             JsonObject sns = (JsonObject) jsonParser.parse(result);
-            Log.i("MyMarker","찾은 장소"+sns.toString());
+            Log.i("MyMarker","result json"+sns.toString());
+
+            dataSetting(sns,sns.size());
+
+
+
             //다이얼로그 닫기
             if(progressDialog!=null && progressDialog.isShowing())
                 progressDialog.dismiss();
         }
     }///////////////AsyncTask
 
+    private void dataSetting(JsonObject sns,int snsLength){
+        String snsProfile = null,  snsId = null,  snsContent = null, snsRe = null;
 
+        Log.i("MyMarker","dataSetting json"+sns.toString());
+
+        SNSAdapter adapter_SNS = new SNSAdapter();
+
+        for (int i=0; i<snsLength; i++) {
+            snsProfile=sns.getAsJsonObject(String.valueOf(i)).getAsJsonObject().get("profile").getAsString();
+
+            snsId=sns.getAsJsonObject(String.valueOf(i)).getAsJsonObject().get("id").getAsString();
+            snsContent=sns.getAsJsonObject(String.valueOf(i)).getAsJsonObject().get("img").getAsString();
+
+            snsRe=sns.getAsJsonObject(String.valueOf(i)).getAsJsonObject().get("tags").getAsString().replaceAll("<div class=\\\"snsContent\\\">","\r\n\n").replaceAll("</div>"," ");
+            Log.i("MyMarker","snsProfile"+snsProfile);
+            Log.i("MyMarker","snsId"+snsId);
+            Log.i("MyMarker","snsContent"+snsContent);
+            adapter_SNS.addItem(snsProfile, snsId, snsContent,snsRe);
+        }
+
+        /* 리스트뷰에 어댑터 등록 */
+        listView_sns.setAdapter(adapter_SNS);
+    }
 }
