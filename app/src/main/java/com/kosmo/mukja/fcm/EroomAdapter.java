@@ -1,8 +1,8 @@
 package com.kosmo.mukja.fcm;
 
-
-
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -15,6 +15,13 @@ import android.widget.TextView;
 
 import com.kosmo.mukja.R;
 import com.squareup.picasso.Picasso;
+import android.widget.Toast;
+
+
+import com.kosmo.mukja.LoginActivity;
+import com.kosmo.mukja.R;
+import com.kosmo.mukja.RegisterActivity;
+import com.kosmo.mukja.fcm.ERDTO;
 
 import java.util.List;
 
@@ -30,6 +37,7 @@ public class EroomAdapter extends BaseAdapter {
     //레이아웃 리소스 아이디(선택사항)
     private int layoutResId;
     private CreatERoomActivity customDialog;
+
 
     //2]생성자 정의:생성자로 Context와 리스트뷰에 뿌려줄 데이타를 받는다.
     //             리소스 레이아웃 아이디(int)는 선택사항

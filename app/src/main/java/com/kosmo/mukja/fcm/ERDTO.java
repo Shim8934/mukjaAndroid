@@ -3,7 +3,6 @@ package com.kosmo.mukja.fcm;
 import java.io.Serializable;
 
 public class ERDTO implements Serializable {
-
 	private int er_no;
 	private String er_master;
 	private String username;
