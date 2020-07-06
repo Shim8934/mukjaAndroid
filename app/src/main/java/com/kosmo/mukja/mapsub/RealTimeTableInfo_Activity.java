@@ -1,4 +1,4 @@
-package com.kosmo.mukja;
+package com.kosmo.mukja.mapsub;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,7 +11,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.kosmo.mukja.R;
 import com.kosmo.mukja.content.TabContent2;
 
 import java.io.BufferedReader;

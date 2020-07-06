@@ -2,12 +2,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         >
         <LinearLayout
@@ -59,21 +59,51 @@
             android:id="@+id/testIMG"
             />
 
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="기본 정보"
-            android:textSize="20dp"
-            android:textColor="#646464"
+            android:orientation="horizontal"
             android:layout_marginLeft="20dp"
-            android:textStyle="bold"/>
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기본 정보"
+                android:textSize="20dp"
+                android:textColor="#646464"
+                android:textStyle="bold"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/tvReview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="리뷰 보러가기"
+                    android:textSize="13dp"
+                    android:gravity="right"
+                    android:layout_gravity="center"
+                    android:textColor="#A6A6A6"
+                    android:textStyle="bold"/>
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/pngegg"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             >
             <ImageView
                 android:layout_width="18dp"
@@ -97,7 +127,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             >
             <ImageView
                 android:layout_width="20dp"
@@ -121,7 +151,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             >
             <ImageView
                 android:layout_width="20dp"
@@ -146,7 +176,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             >
             <ImageView
                 android:layout_width="25dp"
@@ -168,7 +198,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             >
@@ -243,6 +273,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             />
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -255,11 +287,13 @@
         <ListView
             android:id="@+id/store_menu_listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
-            android:layout_alignParentStart="true">
-        </ListView>
+            android:layout_alignParentStart="true"
+            >
 
+        </ListView>
     </LinearLayout>
+
 
 </ScrollView>
