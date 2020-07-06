@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "981383500941",
+    "firebase_url": "https://mukja-fa6bc.firebaseio.com",
+    "project_id": "mukja-fa6bc",
+    "storage_bucket": "mukja-fa6bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981383500941:android:4d8b0191cab544105ebec4",
+        "android_client_info": {
+          "package_name": "com.kosmo.mukja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981383500941-2or962v5kfhh0n8nrl458h96qduak47c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kosmo.mukja",
+            "certificate_hash": "b33df5e77ee8de2da716aaf2deded28901f84ff0"
+          }
+        },
+        {
+          "client_id": "981383500941-rshe268th3v2iorsrtrpv9kkklafpnpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMyciuDhJZ5h7F8jdeP2nH8Kau1Vas2NE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981383500941-rshe268th3v2iorsrtrpv9kkklafpnpa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

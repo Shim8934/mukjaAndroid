@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:background="@drawable/testt"
+    >
+    <ImageView
+
+        android:id="@+id/itemicon"
+        android:scaleType="fitXY"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@drawable/testt"
+        />
+    <LinearLayout
+        android:layout_weight="4"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:background="@drawable/testt"
+        >
+        <TextView
+
+            android:id="@+id/itemTextName"
+            android:textColor="#228B22"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/testt"
+            />
+        <TextView
+            android:id="@+id/itemTextDept"
+            android:textColor="#A52A2A"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:background="@drawable/testt"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="참여하기"
+            android:gravity="center"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:id="@+id/goin"
+            >
+
+        </TextView>
+    </LinearLayout>
+</LinearLayout>

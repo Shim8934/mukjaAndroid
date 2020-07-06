@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kosmo.mukja">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
+        android:name=".Map_app"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
-
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="h620a2wjb4" />
         <activity
             android:name=".LoginActivity"
             android:configChanges="orientation|screenSize"
@@ -22,12 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".RegisterActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
-
         </activity>
         <activity
             android:name=".MainActivity"
@@ -35,6 +37,62 @@
             android:windowSoftInputMode="stateHidden|adjustPan">
 
         </activity>
+
+        <activity
+            android:name=".FilterActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+        <!--모임리스트-->
+        <activity
+            android:name=".fcm.EroomlistActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+
+        <activity
+            android:name=".fcm.ChatActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+        <activity
+            android:name=".RealTimeTableInfo_Activity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+        <activity
+            android:name=".AddrList"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+
+        <activity
+            android:name=".fcm.CreatERoomActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+
+        <activity
+        android:name=".fcm.StartActivity"
+        android:configChanges="orientation|screenSize"
+        android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+        <activity
+            android:name=".Store_infoActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+
+
+        <service
+            android:name=".fcm.FirebaseInstanceIDService"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
+
 
 </manifest>
