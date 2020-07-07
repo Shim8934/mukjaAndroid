@@ -53,6 +53,18 @@
             android:windowSoftInputMode="stateHidden|adjustPan">
 
         </activity>
+        <activity
+            android:name=".mypage.RequestER"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+
+        </activity>
+        <activity
+            android:name=".mypage.MyFallow"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+
+        </activity>
 
         <activity
             android:name=".FilterActivity"

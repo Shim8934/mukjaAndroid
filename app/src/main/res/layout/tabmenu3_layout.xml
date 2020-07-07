@@ -69,7 +69,8 @@
                     android:id="@+id/user_profile"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
-                    android:background="#E3E3E3" />
+                    android:background="#E3E3E3"
+                    android:layout_marginLeft="10dp"/>
 
 
             </LinearLayout>
@@ -143,16 +144,16 @@
                         android:background="@drawable/addr_icon"
                         android:layout_marginLeft="10dp"
                         />
+
                     <TextView
+                        android:id="@+id/addr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="주소"
-                        android:id="@+id/addr"
-                        android:textColor="#646464"
-                        android:textSize="15dp"
                         android:layout_marginLeft="10dp"
-                        />
+                        android:text="주소"
+                        android:textColor="#646464"
+                        android:textSize="15dp" />
                 </LinearLayout>
 
 
@@ -250,7 +251,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="모임 가입 신청 보기"
+            android:text="내게 온 같이먹자 요청"
             android:textColor="#646464"
             android:textSize="15dp"></TextView>
         <ImageView

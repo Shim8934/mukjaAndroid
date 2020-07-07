@@ -16,6 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
@@ -47,6 +48,7 @@ public class Store_infoActivity extends AppCompatActivity {
     private TextView tvIntro;
     private TextView tvName;
     private TextView tvReview;
+    private TextView tvFallow;
     private ImageView testIMG;
     private ImageView store_close;
     private RatingBar ratingStore;
@@ -95,6 +97,7 @@ public class Store_infoActivity extends AppCompatActivity {
         testIMG = findViewById(R.id.testIMG);
         store_close =findViewById(R.id.store_close);
         store_menu_listview = findViewById(R.id.store_menu_listview);
+        tvFallow = findViewById(R.id.tv_fallow);
     }//initView
 
     @Override
@@ -152,7 +155,65 @@ public class Store_infoActivity extends AppCompatActivity {
             }
         });
 
+        tvFallow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FallowAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Android/Fallow.do",store_id,user_id);
+            }
+        });
+
     }//onCreate
+
+    //서버로 데이타 전송 및 응답을 받기 위한 스레드 정의
+    private class FallowAsyncTask extends AsyncTask<String,Void,String> {
+        private AlertDialog progressDialog;
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.i("MyMarker","요청주소:"+String.format("%s?username=%s&user_id=%s",params[0],params[1],params[2]));
+            StringBuffer buf = new StringBuffer();
+
+            try {
+                URL url = new URL(String.format("%s?store_id=%s&user_id=%s",params[0],params[1],params[2]));
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                //서버에 요청 및 응답코드 받기
+                int responseCode=conn.getResponseCode();
+                if(responseCode ==HttpURLConnection.HTTP_OK){
+                    //연결된 커넥션에서 서버에서 보낸 데이타 읽기
+                    BufferedReader br =
+                            new BufferedReader(
+                                    new InputStreamReader(conn.getInputStream(),"UTF-8"));
+                    String line;
+                    while((line=br.readLine())!=null){
+                        buf.append(line);
+                    }
+                    br.close();
+                }
+            }
+            catch(Exception e){e.printStackTrace();}
+
+            SystemClock.sleep(2000);
+            return buf.toString();
+        }///////////doInBackground
+
+        @Override
+        protected void onPostExecute(String result) {
+            JsonParser jsonParser = new JsonParser();
+            JsonObject storeinfoJson = (JsonObject) jsonParser.parse(result);
+            result = storeinfoJson.get("result").toString().replaceAll("\"","").trim();
+            Log.i("MyMarker","찜결과:"+result);
+            if(Integer.parseInt(result)==0 ){
+                Toast.makeText(context,"이미 찜한 상태에요!",Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(context,"찜하였어요,마이페이지에서 확인가능해요!",Toast.LENGTH_LONG).show();
+            }
+            //다이얼로그 닫기
+
+        }
+    }///////////////AsyncTask
+
+
     public class RollingAdapter extends RollingViewPagerAdapter<String> {
 
         public RollingAdapter(Context context, ArrayList<String> itemList) {
@@ -221,7 +282,6 @@ public class Store_infoActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-
             Log.i("MyMarker","추천result:"+result);
 
             //다이얼로그 닫기

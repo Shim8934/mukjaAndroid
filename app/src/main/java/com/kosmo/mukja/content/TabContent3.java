@@ -26,7 +26,9 @@ import androidx.fragment.app.Fragment;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kosmo.mukja.R;
+import com.kosmo.mukja.mypage.MyFallow;
 import com.kosmo.mukja.mypage.MyReview;
+import com.kosmo.mukja.mypage.RequestER;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
@@ -72,6 +74,23 @@ public class TabContent3 extends Fragment {
             }
         });
 
+        likestore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myReview_intent = new Intent(context, MyFallow.class);
+                myReview_intent.putExtra("username",username);
+                startActivity(myReview_intent);
+            }
+        });
+
+        requestER.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myReview_intent = new Intent(context, RequestER.class);
+                myReview_intent.putExtra("username",username);
+                startActivity(myReview_intent);
+            }
+        });
         return view;
     }
 

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="30dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/fallow_item_layout"
+        >
+        <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#EAEAEA"
+        android:id="@+id/fallow_storeimg"
+            android:layout_marginLeft="20dp"
+        />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+             android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/fallow_storename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="가게 이름"
+                android:textColor="#3E3E3E"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:id="@+id/fallow_postdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="찜한 날짜"
+                android:textColor="#646464"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"></TextView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="삭제"
+                android:id="@+id/remove_fallow"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="10dp"
+            />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
