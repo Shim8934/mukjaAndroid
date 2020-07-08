@@ -1,47 +1,55 @@
 package com.kosmo.mukja.fcm;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kosmo.mukja.R;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Vector;
 
 import tech.gusavila92.websocketclient.WebSocketClient;
-
+//import org.java_websocket.client.;
 
 public class ChatActivity extends AppCompatActivity {
     private WebSocketClient webSocketClient;
-    private TextView chatView;
-    private Button chatSent;
-    private EditText chatEdit;
+
+    private Context context;
+    private RelativeLayout chatLayout;
+    private RecyclerView chatListView;
+    private LinearLayout bottomlayout;
+    private EditText chatEditText1;
+    private ImageButton enterChat1;
+    private FloatingActionButton moveToDown;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_chatroom);
         createWebSocketClient();
+
         initView();
-
-
     }
 
     private void createWebSocketClient() {
         URI uri;
         try {
             // Connect to local host
-            uri = new URI("ws://115.91.88.230:9998/mukja/chat.do");
+            uri = new URI("ws://192.168.0.6:8080/mukja/chat.do");
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;
@@ -51,12 +59,13 @@ public class ChatActivity extends AppCompatActivity {
             public void onOpen() {
                 Log.i("WebSocket", "Session is starting");
                 webSocketClient.send("Hello World!");
-                chatSent.setOnClickListener(new View.OnClickListener() {
+                enterChat1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Log.i("WebSocket", "버튼클릭");
-                        Log.i("WebSocket", "내용:"+chatEdit.getText().toString());
-                        webSocketClient.send(chatEdit.getText().toString());
+                        Log.i("WebSocket", "내용:" + chatEditText1.getText().toString());
+
+                        webSocketClient.send(chatEditText1.getText().toString());
                     }
                 });
 
@@ -70,9 +79,7 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            Log.i("WebSocket", s);
-                          /*  TextView textView = findViewById(R.id.chat_view);
-                            textView.setText(message);*/
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -109,11 +116,16 @@ public class ChatActivity extends AppCompatActivity {
         webSocketClient.connect();
     }
 
-    private void initView() {
 
-        chatSent = findViewById(R.id.chat_sent);
-        chatEdit = findViewById(R.id.chat_edit);
+    private void initView() {
+        chatLayout = findViewById(R.id.chat_layout);
+        chatListView = findViewById(R.id.chat_list_view);
+        bottomlayout = findViewById(R.id.bottomlayout);
+        chatEditText1 = findViewById(R.id.chat_edit_text1);
+        enterChat1 = findViewById(R.id.enter_chat1);
+        moveToDown = findViewById(R.id.move_to_down);
     }
 }
+
 
 

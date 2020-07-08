@@ -1,187 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
         android:background="@drawable/testt"
-        android:orientation="horizontal">
-
+        >
         <TextView
+            android:id="@+id/filterText"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:text="같이먹자 모임 상세보기"
+            android:layout_marginLeft="5dp"
             android:gravity="center"
-            android:text="같이먹자 모임 생성하기"
             android:textColor="#303030"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="right">
-
             <Button
                 android:id="@+id/close_btn"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="15dp"
-                android:background="@drawable/close" />
+                android:background="@drawable/close"
+                />
         </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.35"
+        android:layout_weight="1.5"
         android:background="@drawable/testt"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/Profile"
+            />
+    </LinearLayout>
+    <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="0.5"
+       android:background="@drawable/testt"
+       android:orientation="horizontal"
+       >
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.1"
-            android:gravity="center|right"
             android:text="제목:"
             android:textColor="@android:color/black"
-            android:textSize="20dp"/>
-
-        <EditText
+            android:gravity="center|right"
+            android:textSize="20dp"
+            >
+        </TextView>
+        <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
             android:background="@null"
-            android:hint=" 제목을 입력해주세요(20자)"
             android:maxLength="20"
             android:maxLines="1"
-            android:textSize="18dp"
-            android:id="@+id/title"
-            />
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:id="@+id/titles"
+            android:gravity="left|center"
+            android:padding="5dp"
+            ></TextView>
 
-    </LinearLayout>
-
+   </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="-1dp"
-        android:layout_weight=".8"
+        android:layout_weight="1"
         android:background="@drawable/testt"
-        android:paddingTop="10dp">
-
+        android:layout_marginTop="-1dp"
+        android:paddingTop="10dp"
+        >
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.1"
-            android:gravity="right"
             android:text="내용:"
+            android:textSize="20dp"
             android:textColor="@android:color/black"
-            android:textSize="20dp"/>
-
-        <EditText
+            android:gravity="right"
+            >
+        </TextView>
+        <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
             android:background="@null"
             android:gravity="top"
-            android:hint=" 내용을 입력해주세요(50자)"
             android:maxLength="50"
-            android:id="@+id/content"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:id="@+id/contents"
+            android:paddingLeft="5dp"
             />
-
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:background="@drawable/testt"
+        android:weightSum="3"
         android:orientation="horizontal"
-        android:weightSum="3">
-
+        android:background="@drawable/testt"
+        >
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:text="닉 네 임"
             android:gravity="center"
-            android:text="최대인원:"
             android:textColor="@android:color/black"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
 
-        <com.gildaswise.horizontalcounter.HorizontalCounter
-            android:id="@+id/horizontalCounter"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            app:displayAsInteger="true"
-            app:initialValue="1"
-            app:maxValue="100"
-            app:minValue="1"
-            app:minusButtonColor="#F44336"
-            app:plusButtonColor="#2196F3"
-            app:stepValue="1"
-            app:textColor="#009688"
-            app:textSize="10dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.4"
-        android:background="@drawable/testt">
-
+            >
+        </TextView>
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="모 임 일:"
-            android:textColor="@android:color/black"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/datepicker"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
             android:textColor="@android:color/black"
             android:textSize="20dp"
-            />
+            android:id="@+id/nickname"
+            >
+        </TextView>
     </LinearLayout>
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4"
-        android:background="@drawable/testt">
-
+        android:layout_weight="0.5"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:background="@drawable/testt"
+        >
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:text="나 이 대"
             android:gravity="center"
-            android:text="모 임 시 간:"
             android:textColor="@android:color/black"
-            android:textSize="20dp" />
-
+            android:textSize="20dp"
+            >
+        </TextView>
         <TextView
-            android:id="@+id/timepicker"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
             android:textColor="@android:color/black"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:id="@+id/ages"
+            >
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:background="@drawable/testt"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="최대인원"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            >
+        </TextView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:id="@+id/max"
+            >
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:background="@drawable/testt"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="모 임 일"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            />
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:id="@+id/date"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:background="@drawable/testt"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="모 임 시 간"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            />
 
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:gravity="center"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -196,11 +267,9 @@
             android:layout_weight="2"
             android:gravity="center"
             android:textColor="@android:color/black"
-            android:textSize="20dp"
-            android:text="기피재료를 골라주세요"
+            android:textSize="18dp"
+            android:text="모임 기피재료"
             />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -357,14 +426,20 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/darker_gray"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight=".5"
+        android:orientation="horizontal"
+        >
         <Button
-            android:id="@+id/createRoom_btn"
+            android:id="@+id/creatRoom_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="채팅방 생성하기" />
+            android:text="모임 참여하기"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="#0101DF"
+            />
     </LinearLayout>
 </LinearLayout>
 

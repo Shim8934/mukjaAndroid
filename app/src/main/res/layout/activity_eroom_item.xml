@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    android:background="@drawable/testt"
+
     >
     <ImageView
 
@@ -50,7 +50,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="참여하기"
+            android:text="상세보기"
             android:gravity="center"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"

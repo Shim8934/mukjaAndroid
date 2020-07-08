@@ -120,9 +120,17 @@ public class EroomlistActivity extends AppCompatActivity {
                 for (int i = 0; i < erooms.size(); i++) {
                     JsonObject eroomInfo = (JsonObject) erooms.get(i);
                     ERDTO erdto = new ERDTO();
+                    erdto.setEr_no(Integer.parseInt(eroomInfo.get("er_no").toString().replaceAll("\"", "")));
+                    erdto.setStore_id(eroomInfo.get("s_username").toString().replaceAll("\"", ""));
                     erdto.setU_img(eroomInfo.get("u_img").toString().replaceAll("\"", ""));
                     erdto.setEr_title(eroomInfo.get("er_title").toString().replaceAll("\"", ""));
-                    erdto.setEr_content(eroomInfo.get("er_content").toString().replaceAll("\"", ""));
+                    erdto.setEr_content(eroomInfo.get("er_content").toString().replaceAll("\"", "").replace("<p>", "").replace("</p>", ""));
+                    erdto.setU_age(eroomInfo.get("u_age").toString().replaceAll("\"", ""));
+                    erdto.setU_nick(eroomInfo.get("u_nick").toString().replaceAll("\"", ""));
+                    erdto.setEr_time(eroomInfo.get("er_time").toString().replaceAll("\"", ""));
+                    erdto.setEr_master(eroomInfo.get("er_master").toString().replaceAll("\"", ""));
+                    erdto.setEr_tend(eroomInfo.get("er_tend").toString().replaceAll("\"", ""));
+                    erdto.setEr_max(eroomInfo.get("er_max").toString().replaceAll("\"", ""));
                     arrayList.add(erdto);
                 }
                 showChatList();

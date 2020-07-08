@@ -1,6 +1,6 @@
 package com.kosmo.mukja.fcm;
 
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +17,8 @@ import com.kosmo.mukja.R;
 import com.squareup.picasso.Picasso;
 import android.widget.Toast;
 
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.kosmo.mukja.LoginActivity;
 import com.kosmo.mukja.R;
@@ -96,6 +98,7 @@ public class EroomAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.activity_eroom_item, null);
             //인자생성자2 사용시]
             //convertView=inflater.inflate(layoutResId,null);
+
         }
         //리스트 뷰에서 하나의 아이템을 구성하는 각 위젯의 데이타 설정]
         //이미지뷰 위젯 얻고 데이타 설정]
@@ -111,9 +114,21 @@ public class EroomAdapter extends BaseAdapter {
         goin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(context,ChatActivity.class);
+                Intent intent = new Intent(context,ViewDetailsActivity.class);
+                intent.putExtra("er_no",items.get(position).getEr_no());
+                intent.putExtra("store_id",items.get(position).getStore_id());
+                intent.putExtra("master",items.get(position).getEr_master());
+                intent.putExtra("img",items.get(position).getU_img());
+                intent.putExtra("title",items.get(position).getEr_title());
+                intent.putExtra("content",items.get(position).getEr_content());
+                intent.putExtra("nick",items.get(position).getU_nick());
+                intent.putExtra("age",items.get(position).getU_age());
+                intent.putExtra("max",items.get(position).getEr_max());
+                intent.putExtra("time",items.get(position).getEr_time());
+                intent.putExtra("tend",items.get(position).getEr_tend());
+                intent.putExtra("curr",items.get(position).getEr_curr());
                 context.startActivity(intent);
+
             }
         });
         return convertView;
