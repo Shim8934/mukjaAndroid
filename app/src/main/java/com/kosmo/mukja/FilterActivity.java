@@ -1,6 +1,9 @@
 package com.kosmo.mukja;
 
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
@@ -79,6 +82,8 @@ public class FilterActivity extends AppCompatActivity {
         btnPK = findViewById(R.id.btnPK);
         btnSB = findViewById(R.id.btnSB);
         btnSF = findViewById(R.id.btnSF);
+
+
 
         prefer_codes = intent.getBundleExtra("prefer_codes");
         avoid_codes = intent.getBundleExtra("avoid_codes");

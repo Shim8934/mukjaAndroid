@@ -126,7 +126,7 @@ public class MyER extends AppCompatActivity {
                  String u_tend="";
                  String u_age="";
                  String u_img="";
-
+                 String u_id="";
                 if (my_erlist.get(i).getAsJsonObject().get("u_img") != null) {
                     u_img = "http://192.168.0.6:8080/mukja" + my_erlist.get(i).getAsJsonObject().get("u_img").toString().replaceAll("\"", "");
                 }
@@ -183,10 +183,18 @@ public class MyER extends AppCompatActivity {
                 }
                 Log.i("MyMarker", "[참여한er u_age] : " + u_age);
 
+                if (my_erlist.get(i).getAsJsonObject().get("er_currcount") != null) {
+                    er_max += "명/"+my_erlist.get(i).getAsJsonObject().get("er_currcount").toString().replaceAll("\"", "")+"명";
+                }
+                Log.i("MyMarker", "[참여한er er_currcount] : " + er_max);
 
+                if (my_erlist.get(i).getAsJsonObject().get("u_id") != null) {
+                    u_id = my_erlist.get(i).getAsJsonObject().get("u_id").toString().replaceAll("\"", "");
+                }
+                Log.i("MyMarker", "[참여한er u_id] : " + u_id);
 
                 myERAdapter.addItem(   er_no,erjoin_num,store_name,er_title,
-                        er_tend,er_max,er_time,u_nick,u_tend,u_age, u_img);
+                        er_tend,er_max,er_time,u_nick,u_tend,u_age, u_img,u_id);
             }
             mMyER_listView.setAdapter(myERAdapter);
 

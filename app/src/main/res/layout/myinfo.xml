@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/myInfo_close"
+                android:layout_width="10dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center"
+                android:background="@drawable/pngegg" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:text="내 프로필"
+                android:textColor="#616161"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="50dp"
+                />
+
+        </LinearLayout>
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기본 정보"
+                android:textColor="#646464"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:background="@drawable/myinfoperson"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/myinfo_id"
+                android:textSize="20dp"
+                android:text=""
+                android:textColor="#737373"
+                android:layout_marginLeft="10dp"
+
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            >
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="37dp"
+                android:background="@drawable/pass" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/myinfo_pwd"
+                android:text=""
+                android:hint="비밀번호를 확인하세요"
+                android:textColor="#636363"
+                android:layout_marginLeft="10dp"
+                android:password="true"
+
+                />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            >
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="37dp"
+                android:background="@drawable/pass" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/myinfo_pwd2"
+                android:text=""
+                android:password="true"
+                android:hint="비밀번호를 입력하세요"
+                android:textColor="#636363"
+                android:layout_marginLeft="10dp"
+
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            >
+            <ImageView
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:background="@drawable/nickicon"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/myinfo_nick"
+                android:text=""
+                android:hint="닉네임을 입력하세요"
+                android:textColor="#636363"
+                android:layout_marginLeft="10dp"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            >
+            <ImageView
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:background="@drawable/addr"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/myinfo_addr"
+                android:text=""
+                android:hint="주소를 입력하세요"
+                android:textColor="#636363"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        >
+        <ImageView
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:background="@drawable/phone"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/myinfo_ph"
+            android:text=""
+            android:hint="연락처를 입력하세요"
+            android:textColor="#636363"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            >
+            <ImageView
+            android:layout_width="37dp"
+            android:layout_height="34dp"
+            android:background="@drawable/age"
+            />
+            <RadioGroup
+                android:id="@+id/myinfo_agegroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10대"
+                    android:textSize="13dp"
+                    android:gravity="center"
+                    android:id="@+id/age_10"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20대"
+                    android:textSize="13dp"
+                    android:id="@+id/age_20"
+                    />
+                <RadioButton
+                    android:id="@+id/age_30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30대"
+                    android:textSize="13dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="40대"
+                    android:textSize="13dp"
+                    android:id="@+id/age_40"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50대"
+                    android:textSize="13dp"
+                    android:id="@+id/age_50"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="60대이상"
+                    android:textSize="13dp"
+                    android:id="@+id/age_60"
+                    />
+
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="top"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#E3E3E3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="성향 정보"
+                android:textColor="#646464"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+
+            <ToggleButton
+                android:id="@+id/btnBD"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/db_b"
+                />
+
+
+            <ToggleButton
+                android:id="@+id/btnCW"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/cw_b"
+                />
+            <ToggleButton
+                android:id="@+id/btnDP"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/dp_b"
+                />
+
+
+
+            <ToggleButton
+                android:id="@+id/btnEG"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/eg_b"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="조류"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="소"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="유제품"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="달걀"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <ToggleButton
+                android:id="@+id/btnFL"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/fl_b"
+                />
+            <ToggleButton
+                android:id="@+id/btnFS"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:text="ToggleButton"
+                android:background="@drawable/fs_b"
+                />
+            <ToggleButton
+                android:id="@+id/btnMK"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:text="ToggleButton"
+                android:background="@drawable/mk_b"
+                />
+            <ToggleButton
+                android:id="@+id/btnPE"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:text="ToggleButton"
+                android:background="@drawable/pe_b"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="밀"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="생선"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="우유"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="땅콩"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <ToggleButton
+                android:id="@+id/btnSF"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/sf_b"
+                android:checked="true"
+                android:text="ToggleButton"
+                android:textOff=""
+                android:textOn="" />
+            <ToggleButton
+                android:id="@+id/btnPK"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:text="ToggleButton"
+                android:background="@drawable/pk_b"
+                />
+            <ToggleButton
+                android:id="@+id/btnSB"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:text="ToggleButton"
+                android:background="@drawable/sb_b"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="각갑류"
+                android:layout_marginLeft="23dp"
+                android:layout_marginRight="23dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="돼지"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="대두"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#E3E3E3" />
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>

@@ -9,28 +9,29 @@ public class MYERItem {
    private String er_tend;
    private String er_max;
    private String er_time;
+   private String er_currcount;
    private String u_nick;
     private String u_tend;
    private String u_age;
    private String u_img;
-
+   private String u_id;
    public MYERItem() {
    }
 
-   public MYERItem(String er_no, String erjoin_num, String store_name, String er_title,
-                   String er_tend, String er_max, String er_time, String u_nick,
-                   String u_tend, String u_age, String u_img) {
-      this.er_no = er_no;
-      this.erjoin_num = erjoin_num;
-      this.store_name = store_name;
-      this.er_title = er_title;
-      this.er_tend = er_tend;
-      this.er_max = er_max;
-      this.er_time = er_time;
-      this.u_nick = u_nick;
-      this.u_tend = u_tend;
-      this.u_age = u_age;
-      this.u_img = u_img;
+   public String getU_id() {
+      return u_id;
+   }
+
+   public void setU_id(String u_id) {
+      this.u_id = u_id;
+   }
+
+   public String getEr_currcount() {
+      return er_currcount;
+   }
+
+   public void setEr_currcount(String er_currcount) {
+      this.er_currcount = er_currcount;
    }
 
    public String getEr_no() {

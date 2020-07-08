@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import androidx.fragment.app.Fragment;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kosmo.mukja.R;
+import com.kosmo.mukja.mypage.EditMyInfo;
 import com.kosmo.mukja.mypage.MyER;
 import com.kosmo.mukja.mypage.MyFallow;
 import com.kosmo.mukja.mypage.MyReview;
@@ -97,6 +99,15 @@ public class TabContent3 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, MyER.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
+            }
+        });
+
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, EditMyInfo.class);
                 intent.putExtra("username",username);
                 startActivity(intent);
             }

@@ -171,6 +171,7 @@ public class RequestER extends AppCompatActivity {
                 Log.i("MyMarker", "[찜 u_age] : " + u_age);
 
 
+
                 erAdapter.addItem(store_name, store_id, er_title, er_postdate, user_id,
                         erjoin_num, u_nick, u_tend, u_age, u_img);
 

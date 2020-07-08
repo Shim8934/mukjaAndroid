@@ -291,6 +291,7 @@
             android:layout_marginLeft="20dp"
             android:background="@drawable/pngegg" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

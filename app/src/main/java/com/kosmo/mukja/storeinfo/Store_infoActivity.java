@@ -171,7 +171,7 @@ public class Store_infoActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            Log.i("MyMarker","요청주소:"+String.format("%s?username=%s&user_id=%s",params[0],params[1],params[2]));
+            Log.i("MyMarker","요청주소:"+String.format("%s?store_id=%s&user_id=%s",params[0],params[1],params[2]));
             StringBuffer buf = new StringBuffer();
 
             try {
@@ -254,11 +254,11 @@ public class Store_infoActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            Log.i("MyMarker","요청주소:"+String.format("%s?username=%s&user_id=%s&starCount=%s",params[0],params[1],params[2],params[3]));
+            Log.i("MyMarker","요청주소:"+String.format("%s?store_id=%s&user_id=%s&starCount=%s",params[0],params[1],params[2],params[3]));
             StringBuffer buf = new StringBuffer();
 
             try {
-                URL url = new URL(String.format("%s?username=%s&user_id=%s&starCount=%s",params[0],params[1],params[2],params[3]));
+                URL url = new URL(String.format("%s?store_id=%s&user_id=%s&starCount=%s",params[0],params[1],params[2],params[3]));
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
                 //서버에 요청 및 응답코드 받기
                 int responseCode=conn.getResponseCode();
@@ -314,7 +314,7 @@ public class Store_infoActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            Log.i("MyMarker","요청주소:"+String.format("%s?username=%s&user_id=%s",params[0],params[1],params[2]));
+            Log.i("MyMarker","요청주소:"+String.format("%s?store_id=%s&user_id=%s",params[0],params[1],params[2]));
             StringBuffer buf = new StringBuffer();
 
             try {
