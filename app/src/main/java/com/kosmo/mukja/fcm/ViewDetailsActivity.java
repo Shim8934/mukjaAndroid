@@ -1,10 +1,15 @@
 package com.kosmo.mukja.fcm;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -13,11 +18,24 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.kosmo.mukja.R;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 public class ViewDetailsActivity extends AppCompatActivity {
@@ -45,6 +63,9 @@ public class ViewDetailsActivity extends AppCompatActivity {
     private ToggleButton btnSF;
     private Button JoinRoomBtn;
     private String userName;
+    private Context context;
+    private int er_no;
+    private String store_id;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +79,13 @@ public class ViewDetailsActivity extends AppCompatActivity {
         getWindow().getAttributes().height = height;
         Intent intent = getIntent();
         initView();
+        er_no=intent.getIntExtra("er_no",0);
+        store_id=intent.getStringExtra("store_id");
+        Log.i("가즈아",store_id);
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 finish();
             }
         });
@@ -69,17 +94,44 @@ public class ViewDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
                 userName = preferences.getString("username",null);
+                Log.i("가즈아",userName);
                 String master =intent.getStringExtra("master");
-                if(userName.equals(master)){
+                Log.i("가즈아",master);
 
+                if(userName.equals(master)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
+                    builder.setMessage("내가 만든 채팅방입니다.");
+                    builder.setPositiveButton("확인",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                    builder.show();
                 }
                 else{
-//                    ViewDetailsActivity.Details asyncTask = new ViewDetailsActivity.Details();
-//                    asyncTask.execute();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
+                    builder.setMessage("참여하시겠습니까?");
+                    builder.setPositiveButton("예",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                ViewDetailsActivity.Details asyncTask = new ViewDetailsActivity.Details();
+                                asyncTask.execute();
+                                }
+                            });
+                    builder.setNegativeButton("아니오",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(getApplicationContext(),"아니오를 선택했습니다.",Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    builder.show();
+
                 }
 
             }
         });
+
+
 
 
         String content = intent.getStringExtra("content").replace("<p>", "").replace("</p>", "");
@@ -157,52 +209,106 @@ public class ViewDetailsActivity extends AppCompatActivity {
 
 
     }
-//    //서버로 데이타 전송 및 응답을 받기 위한 스레드 정의
-//    private class Details extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//            StringBuffer buf = new StringBuffer();
-//
-//            try {
-//                URL url = new URL(String.format("http://115.91.88.230:9998/mukja/eat_together_list.do?store_id=%s",));
-//                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                //서버에 요청 및 응답코드 받기
-//                int responseCode = conn.getResponseCode();
-//                if (responseCode == HttpURLConnection.HTTP_OK) {
-//                    //연결된 커넥션에서 서버에서 보낸 데이타 읽기
-//                    BufferedReader br =
-//                            new BufferedReader(
-//                                    new InputStreamReader(conn.getInputStream(), "UTF-8"));
-//                    String line;
-//                    while ((line = br.readLine()) != null) {
-//                        buf.append(line);
-//                    }
-//                    br.close();
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            SystemClock.sleep(2000);
-//            return buf.toString();
-//        }///////////doInBackground
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            Log.i("ERoom", result);
-//            if(result!=null) {
-//                JsonParser jsonParser = new JsonParser();
-//                JsonArray erooms = (JsonArray) jsonParser.parse(result);
-//                for (int i = 0; i < erooms.size(); i++) {
-//                    JsonObject eroomInfo = (JsonObject) erooms.get(i);
-//
-//                }
-//
-//            }
-//        }
-//
-//    }///////////////AsyncTask
+    //서버로 데이타 전송 및 응답을 받기 위한 스레드 정의
+    private class Details extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            StringBuffer buf = new StringBuffer();
+
+            try {
+                URL url = new URL(String.format("http://115.91.88.230:9998/mukja/ERoomjoin.do?er_no=%s&username=%s&store_id=%s",er_no,userName,store_id));
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                //서버에 요청 및 응답코드 받기
+                int responseCode = conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    //연결된 커넥션에서 서버에서 보낸 데이타 읽기
+                    BufferedReader br =
+                            new BufferedReader(
+                                    new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        buf.append(line);
+                    }
+                    br.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            SystemClock.sleep(2000);
+            return buf.toString();
+        }///////////doInBackground
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.i("ERoom", result);
+
+            if(result!=null) {
+                try {
+                    JSONObject json = new JSONObject(result);
+                    int no =Integer.parseInt(json.getString("joinER"));
+                    Log.i("가즈아",""+no);
+                    int rool = Integer.parseInt(json.getString("selectrool"));
+                    Log.i("가즈아",""+rool);
+                    if(no==1){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
+                        builder.setMessage("신청이 완료되었습니다.");
+                        builder.setPositiveButton("확인",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                        builder.show();
+                    }
+                    else{
+                        if(rool==0){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
+                            builder.setMessage("수락 대기중입니다.");
+                            builder.setPositiveButton("확인",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                            builder.show();
+                        }
+                        if(rool==1){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
+                            builder.setMessage("이미 가입완료되었습니다.");
+                            builder.setPositiveButton("확인",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                            builder.show();
+                        }
+                        if(rool==-1){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
+                            builder.setMessage("거절되었습니다.");
+                            builder.setPositiveButton("확인",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                            builder.show();
+                        }
+                    }
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+            }
+        }
+
+    }///////////////AsyncTask
 
 
 

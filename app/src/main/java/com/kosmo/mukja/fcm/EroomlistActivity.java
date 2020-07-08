@@ -121,6 +121,7 @@ public class EroomlistActivity extends AppCompatActivity {
                     JsonObject eroomInfo = (JsonObject) erooms.get(i);
                     ERDTO erdto = new ERDTO();
                     erdto.setEr_no(Integer.parseInt(eroomInfo.get("er_no").toString().replaceAll("\"", "")));
+                    erdto.setStore_id(eroomInfo.get("s_username").toString().replaceAll("\"", ""));
                     erdto.setU_img(eroomInfo.get("u_img").toString().replaceAll("\"", ""));
                     erdto.setEr_title(eroomInfo.get("er_title").toString().replaceAll("\"", ""));
                     erdto.setEr_content(eroomInfo.get("er_content").toString().replaceAll("\"", "").replace("<p>", "").replace("</p>", ""));

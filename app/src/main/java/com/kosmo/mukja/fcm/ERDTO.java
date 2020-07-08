@@ -24,32 +24,10 @@ public class ERDTO implements Serializable {
     private String enabled;
     private String authority;
     private String er_curr;
+    private String Store_id;
 
-    public ERDTO() {
-    }
-    public ERDTO(int er_no, String er_master, String username, String er_title, String er_content, String er_time, String er_tend, String er_max, String er_postdate, String password, String u_nick, String u_regidate, String u_img, String u_age, String u_tend, String u_lat, String u_lng, String u_ph, String enabled, String authority, String er_curr) {
-        this.er_no = er_no;
-        this.er_master = er_master;
-        this.username = username;
-        this.er_title = er_title;
-        this.er_content = er_content;
-        this.er_time = er_time;
-        this.er_tend = er_tend;
-        this.er_max = er_max;
-        this.er_postdate = er_postdate;
-        this.password = password;
-        this.u_nick = u_nick;
-        this.u_regidate = u_regidate;
-        this.u_img = u_img;
-        this.u_age = u_age;
-        this.u_tend = u_tend;
-        this.u_lat = u_lat;
-        this.u_lng = u_lng;
-        this.u_ph = u_ph;
-        this.enabled = enabled;
-        this.authority = authority;
-        this.er_curr = er_curr;
-    }
+	public ERDTO() {
+	}
 
 	public int getEr_no() {
 		return er_no;
@@ -217,5 +195,13 @@ public class ERDTO implements Serializable {
 
 	public void setEr_curr(String er_curr) {
 		this.er_curr = er_curr;
+	}
+
+	public String getStore_id() {
+		return Store_id;
+	}
+
+	public void setStore_id(String store_id) {
+		Store_id = store_id;
 	}
 }

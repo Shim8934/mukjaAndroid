@@ -114,9 +114,9 @@ public class EroomAdapter extends BaseAdapter {
         goin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(context,ViewDetailsActivity.class);
-                intent.putExtra("no",items.get(position).getEr_no());
+                intent.putExtra("er_no",items.get(position).getEr_no());
+                intent.putExtra("store_id",items.get(position).getStore_id());
                 intent.putExtra("master",items.get(position).getEr_master());
                 intent.putExtra("img",items.get(position).getU_img());
                 intent.putExtra("title",items.get(position).getEr_title());
