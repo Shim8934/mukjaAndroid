@@ -1,4 +1,3 @@
-include ':Java-WebSocket-1.3.4-javadoc'
 include ':javax.mail'
 include ':additionnal'
 include ':activation'

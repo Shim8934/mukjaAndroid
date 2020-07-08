@@ -19,4 +19,6 @@
     <color name="textDefault">#000000</color>
     <color name="textEnabled">#523738</color>
     <color name="textDisabled">#D7D7D7</color>
+    <color name="white">@android:color/white</color>
+    <color name="transparent">@android:color/transparent</color>
 </resources>
