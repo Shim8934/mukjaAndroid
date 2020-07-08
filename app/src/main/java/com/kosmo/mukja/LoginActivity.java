@@ -199,8 +199,8 @@ public class LoginActivity extends AppCompatActivity {
                                     // Get new Instance ID token
                                     String token = task.getResult().getToken();
                                     Log.i("가즈아",token);
-                                    firebaseDatabase.getReference("userName").setValue(username);
-                                    firebaseDatabase.getReference("userToken").setValue(token);
+                                    String[] key = username.split("@");
+                                    firebaseDatabase.getReference(key[0]).setValue(token);
                                     editor.putString("token",token);
                                     editor.commit();
                                 }
