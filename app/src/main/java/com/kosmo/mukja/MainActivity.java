@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
         //탭 메뉴 추가
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_home).setText("먹자홈"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_search_x).setText("골라먹자"));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage).setText("내꺼먹자"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage).setText("마이먹자"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.web_crawler).setText("긁어먹자"));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage).setText("페이지 5"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage).setText("먹자채팅"));
         //Fragment 생성후 컬렉션에 저장
 
         TabContent1 tabContent1= new TabContent1();

@@ -8,15 +8,15 @@
     tools:context=".MainActivity">
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/good_morning_img" />
+            android:src="@drawable/loginimg2" />
 
     </FrameLayout>
 
@@ -50,12 +50,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/calibri"
         android:gravity="center"
-        android:text="로그인화면"
-        android:textColor="#9affffff"
-        android:textSize="20sp" />
+        android:text="내 마음대로 골라먹자"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,7 +71,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#96ffffff"
+            android:textColorHint="#ffffff"
             android:theme="@style/EditScreenTextInputLayoutStyle">
 
             <EditText
@@ -84,13 +85,13 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="20dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#96ffffff"
+            android:textColorHint="#ffffff"
             android:theme="@style/EditScreenTextInputLayoutStyle">
 
             <EditText
@@ -104,7 +105,7 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="20dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -125,7 +126,7 @@
                 android:text="Sign up"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:textColor="#96ffffff"
+                android:textColor="#ffffff"
                 android:textSize="16dp" />
 
             <Button
@@ -137,7 +138,7 @@
                 android:fontFamily="@font/calibri"
                 android:text="Sign in"
                 android:textAllCaps="false"
-                android:textColor="#96ffffff"
+                android:textColor="#ffffff"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 

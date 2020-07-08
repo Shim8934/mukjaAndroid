@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.kosmo.mukja.content.TabContent2;
 import com.kosmo.mukja.fcm.Users;
 
 import org.json.JSONObject;
@@ -111,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
             Log.i("com.kosmo.mukja","username:"+username.getText().toString()+" password:"+password.getText().toString());
             new LoginAsyncTask().execute(
-                    "http://115.91.88.230:9998/mukja/android/json",username.getText().toString(),password.getText().toString());
+                    "http://"+ TabContent2.ipAddr +":8080/mukja/android/json",username.getText().toString(),password.getText().toString());
 
         }
     };//////////////////OnClickListener

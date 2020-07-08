@@ -32,7 +32,41 @@
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
         <activity
-            android:name=".MainActivity"
+        android:name=".MainActivity"
+        android:configChanges="orientation|screenSize"
+        android:windowSoftInputMode="stateHidden|adjustPan">
+
+    </activity>
+        <activity
+        android:name=".InsertReview"
+        android:configChanges="orientation|screenSize"
+        android:windowSoftInputMode="stateHidden|adjustPan">
+    </activity>
+        <activity
+            android:name=".mypage.MyReview"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+        <activity
+            android:name=".review.StroeReview"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+
+        </activity>
+        <activity
+            android:name=".mypage.MyER"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+
+        </activity>
+        <activity
+            android:name=".mypage.RequestER"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+
+        </activity>
+        <activity
+            android:name=".mypage.MyFallow"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
 
@@ -56,12 +90,12 @@
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
         <activity
-            android:name=".RealTimeTableInfo_Activity"
+            android:name=".mapsub.RealTimeTableInfo_Activity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
         <activity
-            android:name=".AddrList"
+            android:name=".mapsub.AddrList"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
@@ -78,7 +112,7 @@
         android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
         <activity
-            android:name=".Store_infoActivity"
+            android:name=".storeinfo.Store_infoActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>

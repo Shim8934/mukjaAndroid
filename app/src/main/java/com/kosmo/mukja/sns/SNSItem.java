@@ -1,4 +1,4 @@
-package com.kosmo.mukja;
+package com.kosmo.mukja.sns;
 
 import android.graphics.drawable.Drawable;
 

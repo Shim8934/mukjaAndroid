@@ -1,4 +1,4 @@
-package com.kosmo.mukja;
+package com.kosmo.mukja.storeinfo;
 
 public class StroeInfo_item {
 

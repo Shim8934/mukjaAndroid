@@ -1,4 +1,4 @@
-package com.kosmo.mukja;
+package com.kosmo.mukja.mapsub;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -19,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import com.kosmo.mukja.R;
 import com.kosmo.mukja.content.TabContent2;
 
 

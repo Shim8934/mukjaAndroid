@@ -2,7 +2,6 @@ package com.kosmo.mukja.content;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,13 +26,13 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.kosmo.mukja.AddrList;
+import com.kosmo.mukja.mapsub.AddrList;
 
 import com.kosmo.mukja.FilterActivity;
 import com.kosmo.mukja.R;
 import com.kosmo.mukja.fcm.EroomlistActivity;
-import com.kosmo.mukja.RealTimeTableInfo_Activity;
-import com.kosmo.mukja.Store_infoActivity;
+import com.kosmo.mukja.mapsub.RealTimeTableInfo_Activity;
+import com.kosmo.mukja.storeinfo.Store_infoActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraAnimation;
@@ -80,7 +78,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
     private Bundle avoid_codes = new Bundle();
     private Bundle prefer_codes = new Bundle();
     private String store_id;
-    public static final String ipAddr="127.0.0.1";
+    public static final String ipAddr="192.168.0.6";
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -137,7 +135,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                     query +=mapkey+'='+prefer_codes.get(mapkey).toString()+"&";
                 }
                 Log.i("MyMarker",query);
-                new SearchMarkerAsyncTask().execute("http://115.91.88.230:9998/mukja/getMarker.pbs",bukdonglat,bukdonglng,namsualat,namsualng,query);
+                new SearchMarkerAsyncTask().execute("http://"+ipAddr+":8080/mukja/getMarker.pbs",bukdonglat,bukdonglng,namsualat,namsualng,query);
             }
         });//searcher
 
@@ -157,7 +155,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
         btn_x.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
 

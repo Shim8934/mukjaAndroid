@@ -1,9 +1,10 @@
-package com.kosmo.mukja;
+package com.kosmo.mukja.sns;
 
 import android.content.Context;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.kosmo.mukja.R;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 public class SNSAdapter extends BaseAdapter {
@@ -76,7 +77,7 @@ public class SNSAdapter extends BaseAdapter {
     }
     /* 아이템 데이터 추가를 위한 함수. 자신이 원하는대로 작성 */
     public void addItem(String snsProfile, String snsId, String snsContent, String snsRe) {
-
+        Log.i("MyMarker"," 어뎁터 추가");
         SNSItem snsItem = new SNSItem();
         /* MyItem에 아이템을 setting한다. */
         snsItem.setSnsProfile(snsProfile);
