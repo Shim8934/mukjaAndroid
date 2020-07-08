@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kosmo.mukja.R;
+import com.kosmo.mukja.mypage.MyER;
 import com.kosmo.mukja.mypage.MyFallow;
 import com.kosmo.mukja.mypage.MyReview;
 import com.kosmo.mukja.mypage.RequestER;
@@ -68,27 +69,36 @@ public class TabContent3 extends Fragment {
         myreview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myReview_intent = new Intent(context, MyReview.class);
-                myReview_intent.putExtra("username",username);
-                startActivity(myReview_intent);
+                Intent intent = new Intent(context, MyReview.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
             }
         });
 
         likestore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myReview_intent = new Intent(context, MyFallow.class);
-                myReview_intent.putExtra("username",username);
-                startActivity(myReview_intent);
+                Intent intent = new Intent(context, MyFallow.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
             }
         });
 
         requestER.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myReview_intent = new Intent(context, RequestER.class);
-                myReview_intent.putExtra("username",username);
-                startActivity(myReview_intent);
+                Intent intent = new Intent(context, RequestER.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
+            }
+        });
+
+        myER.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, MyER.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
             }
         });
         return view;

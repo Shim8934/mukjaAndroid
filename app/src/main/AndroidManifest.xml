@@ -54,6 +54,12 @@
 
         </activity>
         <activity
+            android:name=".mypage.MyER"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+
+        </activity>
+        <activity
             android:name=".mypage.RequestER"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
