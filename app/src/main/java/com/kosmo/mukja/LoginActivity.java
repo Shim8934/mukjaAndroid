@@ -35,6 +35,7 @@ import com.gun0912.tedpermission.TedPermission;
 import com.kosmo.mukja.content.TabContent2;
 import com.kosmo.mukja.fcm.Users;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.password)
     EditText password;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        //mDatabase = FirebaseDatabase.getInstance().getReference();
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,8 +199,10 @@ public class LoginActivity extends AppCompatActivity {
                                     // Get new Instance ID token
                                     String token = task.getResult().getToken();
                                     Log.i("가즈아",token);
-                                    databaseReference.child("token").push().setValue(username);
-                                    databaseReference.child("token").push().setValue(token);
+                                    firebaseDatabase.getReference("userName").setValue(username);
+                                    firebaseDatabase.getReference("userToken").setValue(token);
+                                    editor.putString("token",token);
+                                    editor.commit();
                                 }
                             });
 

@@ -20,9 +20,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -66,6 +74,9 @@ public class ViewDetailsActivity extends AppCompatActivity {
     private Context context;
     private int er_no;
     private String store_id;
+    private String userToken;
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference=firebaseDatabase.getReference();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +93,17 @@ public class ViewDetailsActivity extends AppCompatActivity {
         er_no=intent.getIntExtra("er_no",0);
         store_id=intent.getStringExtra("store_id");
         Log.i("가즈아",store_id);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i("가즈아",snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +117,8 @@ public class ViewDetailsActivity extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
                 userName = preferences.getString("username",null);
                 Log.i("가즈아",userName);
+                userToken = preferences.getString("token",null);
+                Log.i("가즈아",userToken);
                 String master =intent.getStringExtra("master");
                 Log.i("가즈아",master);
 
