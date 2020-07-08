@@ -105,22 +105,6 @@ public class LoginActivity extends AppCompatActivity {
                 .setPermissions(Manifest.permission.INTERNET)
                 .check();
 
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("가즈아", "getInstanceId failed", task.getException());
-                            return;
-                        }
-
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-                        Log.i("가즈아",token);
-                        databaseReference.child("token").push().setValue(token);
-                    }
-                });
-
     }
 
 
@@ -129,13 +113,11 @@ public class LoginActivity extends AppCompatActivity {
 
     //버튼 이벤트 처리]
     private View.OnClickListener listener=new View.OnClickListener() {
-
-
         @Override
         public void onClick(View v) {
             Log.i("com.kosmo.mukja","username:"+username.getText().toString()+" password:"+password.getText().toString());
             new LoginAsyncTask().execute(
-                    "http://"+ TabContent2.ipAddr +":8080/mukja/android/json",username.getText().toString(),password.getText().toString());
+                    "http://115.91.88.230:9998/mukja/android/json",username.getText().toString(),password.getText().toString());
 
         }
     };//////////////////OnClickListener
@@ -197,38 +179,31 @@ public class LoginActivity extends AppCompatActivity {
 
                     String username = json.getString("username");
                     Log.i("com.kosmo.mukja","username:"+username);
-
-//                    Users member = new Users();
-//
-//
-//                    mDatabase.child("users").child("member").setValue(member)
-//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                @Override
-//                                public void onSuccess(Void aVoid) {
-//                                    // Write was successful!
-//                                    Toast.makeText(LoginActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
-//                                }
-//                            })
-//                            .addOnFailureListener(new OnFailureListener() {
-//                                @Override
-//                                public void onFailure(@NonNull Exception e) {
-//                                    // Write failed
-//                                    Toast.makeText(LoginActivity.this, "저장을 실패했습니다.", Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
-
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     intent.putExtra("username",username);
                     startActivity(intent);
-                    //finish()불필요-NO_HISTORY로 설정했기때문에(매니페스트에서)
-                    //아이디 비번저장
                     SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
                     SharedPreferences.Editor editor =preferences.edit();
                     editor.putString("username",json.getString("username"));
                     editor.putString("password",json.getString("password"));
                     editor.commit();
-
                     Log.i("MyMarker","로그인시 아이디:"+preferences.getString("username","defaultID"));
+                    FirebaseInstanceId.getInstance().getInstanceId()
+                            .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                    if (!task.isSuccessful()) {
+                                        Log.w("가즈아", "getInstanceId failed", task.getException());
+                                        return;
+                                    }
+                                    // Get new Instance ID token
+                                    String token = task.getResult().getToken();
+                                    Log.i("가즈아",token);
+                                    databaseReference.child("token").push().setValue(username);
+                                    databaseReference.child("token").push().setValue(token);
+                                }
+                            });
+
 
                 }
                 catch(Exception e){e.printStackTrace();}

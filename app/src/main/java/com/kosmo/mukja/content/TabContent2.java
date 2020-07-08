@@ -135,7 +135,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                     query +=mapkey+'='+prefer_codes.get(mapkey).toString()+"&";
                 }
                 Log.i("MyMarker",query);
-                new SearchMarkerAsyncTask().execute("http://"+ipAddr+":8080/mukja/getMarker.pbs",bukdonglat,bukdonglng,namsualat,namsualng,query);
+                new SearchMarkerAsyncTask().execute("http://115.91.88.230:9998/mukja/getMarker.pbs",bukdonglat,bukdonglng,namsualat,namsualng,query);
             }
         });//searcher
 
