@@ -27,6 +27,8 @@ public class StartActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
+    public StartActivity(Intent intent) {
+    }
 
 
     @Override

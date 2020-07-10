@@ -1,48 +1,87 @@
 package com.kosmo.mukja.fcm;
 
 
-import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.appbar.AppBarLayout;
 import com.kosmo.mukja.R;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Vector;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import tech.gusavila92.websocketclient.WebSocketClient;
-//import org.java_websocket.client.;
 
 public class ChatActivity extends AppCompatActivity {
-    private WebSocketClient webSocketClient;
 
-    private Context context;
-    private RelativeLayout chatLayout;
-    private RecyclerView chatListView;
-    private LinearLayout bottomlayout;
-    private EditText chatEditText1;
-    private ImageButton enterChat1;
-    private FloatingActionButton moveToDown;
-
-
+    WebSocketClient webSocketClient;
+    String imageurl = null;
+    String username = "";
+    String nick = "";
+    int ercno;
+    private AppBarLayout barLayout;
+    private Toolbar toolbar;
+    private ImageButton chatback;
+    private TextView title;
+    private RecyclerView recyclerView;
+    private RelativeLayout bottom;
+    private EditText textSend;
+    private ImageButton btnSend;
+    private MessageAdapter messageAdapter;
+    private List<Chat> mChat = new ArrayList<>();
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chatroom);
+        setContentView(R.layout.activity_message);
+
+
+        barLayout = findViewById(R.id.bar_layout);
+        toolbar = findViewById(R.id.toolbar);
+        chatback = findViewById(R.id.chatback);
+        title = findViewById(R.id.title);
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        bottom = findViewById(R.id.bottom);
+        textSend = findViewById(R.id.text_send);
+        btnSend = findViewById(R.id.btn_send);
+        Intent intent = getIntent();
+        nick = intent.getStringExtra("nick");
+        title.setText(nick);
+        chatback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        username = intent.getStringExtra("username");
+        ercno=intent.getIntExtra("ercno",0);
         createWebSocketClient();
 
-        initView();
+        messageAdapter = new MessageAdapter(ChatActivity.this, mChat, imageurl);
+        recyclerView.setAdapter(messageAdapter);
     }
 
     private void createWebSocketClient() {
@@ -57,29 +96,64 @@ public class ChatActivity extends AppCompatActivity {
         webSocketClient = new WebSocketClient(uri) {
             @Override
             public void onOpen() {
-                Log.i("WebSocket", "Session is starting");
-                webSocketClient.send("Hello World!");
-                enterChat1.setOnClickListener(new View.OnClickListener() {
+                Log.i("가즈아", "Session is starting");
+                btnSend.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.i("WebSocket", "버튼클릭");
-                        Log.i("WebSocket", "내용:" + chatEditText1.getText().toString());
+                        Log.i("가즈아", "버튼클릭");
+                        Log.i("가즈아", "내용:" + textSend.getText().toString());
 
-                        webSocketClient.send(chatEditText1.getText().toString());
+                       String value = textSend.getText().toString();
+                        String msg = username+"/"+ercno+"/msg:"+"kim"+":"+value;
+                        Log.i("가즈아",msg);
+                        if (!msg.equals("")) {
+                            Chat chat = new Chat();
+                            chat.setDetachNo(1);
+                            chat.setUsername(username);
+                            chat.setErcno(ercno);
+                            chat.setMessage(textSend.getText().toString());
+                            mChat.add(chat);
+
+                            messageAdapter.notifyDataSetChanged();
+                            textSend.setText("");
+                            webSocketClient.send(msg);
+                        } else {
+                            Toast.makeText(ChatActivity.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 });
-
             }
 
             @Override
             public void onTextReceived(String s) {
-                Log.i("WebSocket", "Message received");
+                Log.i("가즈아", "Message received");
                 final String message = s;
+                Log.i("가즈아", message);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-
+                            String[] t = message.split("/");
+                            Log.i("가즈아",t[0]);
+                            Log.i("가즈아",t[1]);
+                            Log.i("가즈아",t[2]);
+                            String[] a = t[2].split(":");
+                            Log.i("가즈아",a[2]);
+                            int eno=Integer.parseInt(t[1]);
+                            if(eno==ercno) {
+                                Chat chat = new Chat();
+                                chat.setDetachNo(0);
+                                chat.setUsername(t[0]);
+                                chat.setErcno(eno);
+                                chat.setMessage(a[2].trim());
+                                mChat.add(chat);
+                                messageAdapter.notifyDataSetChanged();
+                            }
+                            messageAdapter.notifyDataSetChanged();
+                            //ChatActivity.Save asyncTask = new ChatActivity.Save();
+                            //asyncTask.execute();
+                            Log.i("가즈아", "onTextReceived");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -89,19 +163,23 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onBinaryReceived(byte[] data) {
+                Log.i("가즈아", "onBinaryReceived");
             }
 
             @Override
             public void onPingReceived(byte[] data) {
+                Log.i("가즈아", "onPingReceived");
             }
 
             @Override
             public void onPongReceived(byte[] data) {
+                Log.i("가즈아", "onPongReceived");
             }
 
             @Override
             public void onException(Exception e) {
-                System.out.println(e.getMessage());
+                Log.i("가즈아", "onException");
+                Log.i("가즈아", "" + e);
             }
 
             @Override
@@ -116,16 +194,55 @@ public class ChatActivity extends AppCompatActivity {
         webSocketClient.connect();
     }
 
+    //저장용
 
-    private void initView() {
-        chatLayout = findViewById(R.id.chat_layout);
-        chatListView = findViewById(R.id.chat_list_view);
-        bottomlayout = findViewById(R.id.bottomlayout);
-        chatEditText1 = findViewById(R.id.chat_edit_text1);
-        enterChat1 = findViewById(R.id.enter_chat1);
-        moveToDown = findViewById(R.id.move_to_down);
+    //서버로 데이타 전송 및 응답을 받기 위한 스레드 정의
+    private class Save extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            StringBuffer buf = new StringBuffer();
+
+            try {
+                URL url = new URL(String.format("http://115.91.88.230:9998/mukja/ERoomjoin.do?er_no=%s&username=%s&store_id=%s"));
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                //서버에 요청 및 응답코드 받기
+                int responseCode = conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    //연결된 커넥션에서 서버에서 보낸 데이타 읽기
+                    BufferedReader br =
+                            new BufferedReader(
+                                    new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        buf.append(line);
+                    }
+                    br.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            SystemClock.sleep(2000);
+            return buf.toString();
+        }///////////doInBackground
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.i("ERoom", result);
+
+            if (result != null) {
+
+            }
+        }
     }
 }
+
+
+
+
+
+
 
 
 
