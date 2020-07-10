@@ -44,6 +44,7 @@ public class ChatActivity extends AppCompatActivity {
     String username;
     String usernick;
     String userimg;
+    int erno;
     int ercno;
     private AppBarLayout barLayout;
     private Toolbar toolbar;
@@ -59,8 +60,6 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-
-
         barLayout = findViewById(R.id.bar_layout);
         toolbar = findViewById(R.id.toolbar);
         chatback = findViewById(R.id.chatback);
@@ -70,8 +69,6 @@ public class ChatActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-
         bottom = findViewById(R.id.bottom);
         textSend = findViewById(R.id.text_send);
         btnSend = findViewById(R.id.btn_send);
@@ -84,9 +81,13 @@ public class ChatActivity extends AppCompatActivity {
                 finish();
             }
         });
-        ercno=intent.getIntExtra("ercno",0);
-        createWebSocketClient();
+        erno=intent.getIntExtra("er_no",0);
+        ercno=intent.getIntExtra("erc_no",0);
 
+        ChatActivity.Save save = new ChatActivity.Save();
+        save.execute();
+
+        createWebSocketClient();
         messageAdapter = new MessageAdapter(ChatActivity.this, mChat, imageurl);
         recyclerView.setAdapter(messageAdapter);
         SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
@@ -208,9 +209,7 @@ public class ChatActivity extends AppCompatActivity {
         webSocketClient.connect();
     }
 
-    //저장용
-
-    //서버로 데이타 전송 및 응답을 받기 위한 스레드 정의
+    //저장메세지 가져오기
     private class Save extends AsyncTask<String, Void, String> {
 
         @Override
@@ -218,7 +217,7 @@ public class ChatActivity extends AppCompatActivity {
             StringBuffer buf = new StringBuffer();
 
             try {
-                URL url = new URL(String.format("http://115.91.88.230:9998/mukja/ERoomjoin.do?er_no=%s&username=%s&store_id=%s"));
+                URL url = new URL(String.format("http://115.91.88.230:9998/mukja/ERoomold.do?erc_no=%s&er_no=%s",ercno,erno));
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 //서버에 요청 및 응답코드 받기
                 int responseCode = conn.getResponseCode();
@@ -243,9 +242,16 @@ public class ChatActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.i("ERoom", result);
-
+            Log.i("가즈아", result);
             if (result != null) {
+
+                for (int i=0;i<result.length();i++){
+                    if(result.contains("left")){
+
+
+                    }
+
+                }
 
             }
         }

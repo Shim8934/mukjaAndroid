@@ -113,6 +113,7 @@ public class TabContent5 extends Fragment {
                     ERDTO erdto = new ERDTO();
                     erdto.setStore_id(chattingInfo.get("store_id").toString().replaceAll("\"", ""));
                     erdto.setEr_time(chattingInfo.get("er_time").toString().replaceAll("\"", ""));
+                    erdto.setEr_no(Integer.parseInt(chattingInfo.get("er_no").toString().replaceAll("\"", "")));
                     erdto.setErc_no(Integer.parseInt(chattingInfo.get("erc_no").toString().replaceAll("\"", "")));
                     erdto.setEr_master(chattingInfo.get("er_master").toString().replaceAll("\"", ""));
                     erdto.setMaster_nick(chattingInfo.get("master_nick").toString().replaceAll("\"", ""));

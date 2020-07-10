@@ -88,7 +88,7 @@ public class ChattingListAdapter extends BaseAdapter {
                 Intent intent = new Intent(context,ChatActivity.class);
                 intent.putExtra("username",items.get(position).getUsername());
                 intent.putExtra("er_no",items.get(position).getEr_no());
-                intent.putExtra("ercno",items.get(position).getErc_no());
+                intent.putExtra("erc_no",items.get(position).getErc_no());
                 intent.putExtra("nick",items.get(position).getMaster_nick());
                 intent.putExtra("img",items.get(position).getMaster_img());
                 context.startActivity(intent);
