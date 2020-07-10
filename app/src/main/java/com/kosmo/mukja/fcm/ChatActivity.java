@@ -2,6 +2,7 @@ package com.kosmo.mukja.fcm;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -29,6 +30,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import tech.gusavila92.websocketclient.WebSocketClient;
 
@@ -36,8 +38,12 @@ public class ChatActivity extends AppCompatActivity {
 
     WebSocketClient webSocketClient;
     String imageurl = null;
-    String username = "";
-    String nick = "";
+    String mastername = "";
+    String masternick = "";
+    String masterimg;
+    String username;
+    String usernick;
+    String userimg;
     int ercno;
     private AppBarLayout barLayout;
     private Toolbar toolbar;
@@ -64,24 +70,31 @@ public class ChatActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+
         bottom = findViewById(R.id.bottom);
         textSend = findViewById(R.id.text_send);
         btnSend = findViewById(R.id.btn_send);
         Intent intent = getIntent();
-        nick = intent.getStringExtra("nick");
-        title.setText(nick);
+        masternick = intent.getStringExtra("nick");
+        title.setText(masternick);
         chatback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        username = intent.getStringExtra("username");
         ercno=intent.getIntExtra("ercno",0);
         createWebSocketClient();
 
         messageAdapter = new MessageAdapter(ChatActivity.this, mChat, imageurl);
         recyclerView.setAdapter(messageAdapter);
+        SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
+        username = preferences.getString("username",null);
+        usernick = preferences.getString("nick",null);
+        userimg = preferences.getString("img",null);
+
+
     }
 
     private void createWebSocketClient() {
@@ -104,7 +117,7 @@ public class ChatActivity extends AppCompatActivity {
                         Log.i("가즈아", "내용:" + textSend.getText().toString());
 
                        String value = textSend.getText().toString();
-                        String msg = username+"/"+ercno+"/msg:"+"kim"+":"+value;
+                        String msg = username+"/"+ercno+"/msg:"+usernick+":"+value;
                         Log.i("가즈아",msg);
                         if (!msg.equals("")) {
                             Chat chat = new Chat();
@@ -113,8 +126,8 @@ public class ChatActivity extends AppCompatActivity {
                             chat.setErcno(ercno);
                             chat.setMessage(textSend.getText().toString());
                             mChat.add(chat);
-
                             messageAdapter.notifyDataSetChanged();
+                            recyclerView.scrollToPosition(messageAdapter.getItemCount()-1);
                             textSend.setText("");
                             webSocketClient.send(msg);
                         } else {
@@ -138,19 +151,20 @@ public class ChatActivity extends AppCompatActivity {
                             Log.i("가즈아",t[0]);
                             Log.i("가즈아",t[1]);
                             Log.i("가즈아",t[2]);
-                            String[] a = t[2].split(":");
-                            Log.i("가즈아",a[2]);
+                            String[] a = t[2].split("msg:");
+                            Log.i("가즈아",a[1]);
                             int eno=Integer.parseInt(t[1]);
                             if(eno==ercno) {
                                 Chat chat = new Chat();
                                 chat.setDetachNo(0);
                                 chat.setUsername(t[0]);
                                 chat.setErcno(eno);
-                                chat.setMessage(a[2].trim());
+                                chat.setMessage(a[1]);
                                 mChat.add(chat);
                                 messageAdapter.notifyDataSetChanged();
+                                recyclerView.scrollToPosition(messageAdapter.getItemCount()-1);
                             }
-                            messageAdapter.notifyDataSetChanged();
+
                             //ChatActivity.Save asyncTask = new ChatActivity.Save();
                             //asyncTask.execute();
                             Log.i("가즈아", "onTextReceived");

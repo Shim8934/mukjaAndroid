@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class ERDTO implements Serializable {
     private int er_no;
+    private int erc_no;
+	private String store_name;
     private String er_master;
     private String username;
     private String er_title;
@@ -13,6 +15,8 @@ public class ERDTO implements Serializable {
     private String er_max;
     private String er_postdate;
     private String password;
+    private String master_nick;
+	private String master_img;
     private String u_nick;
     private String u_regidate;
     private String u_img;
@@ -24,9 +28,25 @@ public class ERDTO implements Serializable {
     private String enabled;
     private String authority;
     private String er_curr;
-    private String Store_id;
+    private String store_id;
 
 	public ERDTO() {
+	}
+
+	public String getMaster_nick() {
+		return master_nick;
+	}
+
+	public void setMaster_nick(String master_nick) {
+		this.master_nick = master_nick;
+	}
+
+	public String getMaster_img() {
+		return master_img;
+	}
+
+	public void setMaster_img(String master_img) {
+		this.master_img = master_img;
 	}
 
 	public int getEr_no() {
@@ -35,6 +55,14 @@ public class ERDTO implements Serializable {
 
 	public void setEr_no(int er_no) {
 		this.er_no = er_no;
+	}
+
+	public int getErc_no() {
+		return erc_no;
+	}
+
+	public void setErc_no(int erc_no) {
+		this.erc_no = erc_no;
 	}
 
 	public String getEr_master() {
@@ -198,10 +226,18 @@ public class ERDTO implements Serializable {
 	}
 
 	public String getStore_id() {
-		return Store_id;
+		return store_id;
 	}
 
 	public void setStore_id(String store_id) {
-		Store_id = store_id;
+		this.store_id = store_id;
+	}
+
+	public String getStore_name() {
+		return store_name;
+	}
+
+	public void setStore_name(String store_name) {
+		this.store_name = store_name;
 	}
 }

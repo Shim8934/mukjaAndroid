@@ -95,6 +95,7 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
+
         <activity
             android:name=".mapsub.RealTimeTableInfo_Activity"
             android:configChanges="orientation|screenSize"
@@ -111,12 +112,6 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
-
-        <activity
-        android:name=".fcm.StartActivity"
-        android:configChanges="orientation|screenSize"
-        android:windowSoftInputMode="stateHidden|adjustPan">
-        </activity>
         <activity
             android:name=".storeinfo.Store_infoActivity"
             android:configChanges="orientation|screenSize"
@@ -128,6 +123,12 @@
             android:windowSoftInputMode="stateHidden|adjustPan"
             android:theme="@style/CustomDialog"
             >
+        </activity>
+        <activity
+            android:name=".fcm.ChatDetailsActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:theme="@style/CustomDialog">
         </activity>
 
         <service
