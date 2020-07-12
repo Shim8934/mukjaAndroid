@@ -176,16 +176,19 @@ public class LoginActivity extends AppCompatActivity {
             if(result !=null && result.length()!=0) {//회원인 경우
                 try {
                     JSONObject json = new JSONObject(result);
-
                     String username = json.getString("username");
                     Log.i("com.kosmo.mukja","username:"+username);
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     intent.putExtra("username",username);
                     startActivity(intent);
+
                     SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
                     SharedPreferences.Editor editor =preferences.edit();
                     editor.putString("username",json.getString("username"));
                     editor.putString("password",json.getString("password"));
+                    editor.putString("img",json.getString("u_img"));
+                    editor.putString("nick",json.getString("u_nick"));
+                    editor.putString("tend",json.getString("u_tend"));
                     editor.commit();
                     Log.i("MyMarker","로그인시 아이디:"+preferences.getString("username","defaultID"));
                     FirebaseInstanceId.getInstance().getInstanceId()

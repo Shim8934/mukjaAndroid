@@ -100,7 +100,7 @@ public class ViewDetailsActivity extends AppCompatActivity {
         initView();
         er_no=intent.getIntExtra("er_no",0);
         store_id=intent.getStringExtra("store_id");
-        nick=intent.getStringExtra("nick");
+        nick=intent.getStringExtra("nick").toString();
         Log.i("가즈아",store_id);
 
         closeBtn.setOnClickListener(new View.OnClickListener() {
@@ -162,7 +162,6 @@ public class ViewDetailsActivity extends AppCompatActivity {
         Picasso.get().load(Uri.parse("http://115.91.88.230:9998/mukja" + intent.getStringExtra("img"))).resize(200, 100).into(Profile);
         titles.setText(intent.getStringExtra("title"));
         contents.setText(content);
-        nickname.setText(intent.getStringExtra("nick"));
         ages.setText(intent.getStringExtra("age"));
         maxs.setText(intent.getStringExtra("max"));
         date.setText(dates);
@@ -283,6 +282,7 @@ public class ViewDetailsActivity extends AppCompatActivity {
                                                 String[] keys = master.split("@");
                                                 Log.i("가즈아", "1:" + keys[0]);
                                                 String tokens = snapshot.getValue().toString();
+                                                Log.i("가즈아", "토큰:" + tokens);
                                                 if (tokens.indexOf(keys[0]) != -1) {
                                                     Log.i("가즈아", "2:있다");
                                                     String[] tokena = tokens.split(",");
