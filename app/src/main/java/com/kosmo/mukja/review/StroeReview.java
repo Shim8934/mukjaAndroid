@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
-import com.kosmo.mukja.InsertReview;
 import com.kosmo.mukja.R;
 import com.kosmo.mukja.content.TabContent2;
 
@@ -49,7 +48,7 @@ public class StroeReview extends AppCompatActivity {
         initView();
         context=StroeReview.this;
         Intent intent = getIntent();
-        String store_id = intent.getStringExtra("store_id");
+        String store_id = intent.getStringExtra("store_id").replaceAll("\"","");
 
         SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
         user_id = preferences.getString("username", "defaultID");
@@ -64,6 +63,7 @@ public class StroeReview extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent insertReviewIntent = new Intent(context, InsertReview.class);
+                insertReviewIntent.putExtra("store_id",store_id);
                 startActivity(insertReviewIntent);
             }
         });

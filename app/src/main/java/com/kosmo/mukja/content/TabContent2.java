@@ -272,6 +272,8 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
             Log.i("MyMarker",markers.toString());
             for(int i=0;i<markers.size();i++){
                 JsonObject markerInfo=(JsonObject)markers.get(i);
+                Log.i("MyMarker","markerInfo"+markerInfo.toString());
+
                 Marker marker = new Marker();
                 marker.setPosition(new LatLng(markerInfo.get("store_lat").getAsDouble(),markerInfo.get("store_lng").getAsDouble()));
                 marker.setMap(naverMap);
@@ -286,8 +288,24 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                         store_id=markerInfo.get("store_id").toString();
                         store_name.setText(markerInfo.get("store_name").toString().replaceAll("\"",""));
                         store_addr.setText(markerInfo.get("store_addr").toString().replaceAll("\"",""));
-                        store_intro.setText(markerInfo.get("store_intro").toString().replaceAll("\"",""));
-                        store_time.setText(markerInfo.get("store_time").toString().replaceAll("\"",""));
+                        store_intro.setText(
+                                markerInfo.get("store_intro").toString()
+                                        .replaceAll("\"","")
+                                        .replaceAll("<p>","")
+                                        .replaceAll("</p>","")
+                                        .replaceAll("r","")
+                                        .replaceAll("n","")
+                                        .replace("\\","")
+                                        .replace("  ","")
+                        );
+                        store_time.setText(
+                                markerInfo.get("store_time").toString()
+                                        .replaceAll("\"","")
+                                        .replaceAll("r","")
+                                        .replaceAll("n","")
+                                        .replace("\\","")
+                                        .replace("  ","")
+                        );
                         return false;
                     }
                 });
