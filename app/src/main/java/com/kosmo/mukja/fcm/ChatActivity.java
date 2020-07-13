@@ -13,15 +13,12 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.appbar.AppBarLayout;
 import com.kosmo.mukja.R;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -30,9 +27,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
-
 import tech.gusavila92.websocketclient.WebSocketClient;
+
+
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -102,7 +99,7 @@ public class ChatActivity extends AppCompatActivity {
         URI uri;
         try {
             // Connect to local host
-            uri = new URI("ws://192.168.0.6:8080/mukja/chat.do");
+            uri = new URI("ws://115.91.88.230:9998/mukja/chat.do");
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;
@@ -242,17 +239,38 @@ public class ChatActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.i("가즈아", result);
+            Log.i("가즈아","갔다옴");
+            SharedPreferences preferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
+            String userName = preferences.getString("username", null);
+            String nick = preferences.getString("nick", null);
             if (result != null) {
-
-                for (int i=0;i<result.length();i++){
-                    if(result.contains("left")){
-
-
+                String s = result.replaceAll("<div class=\"tok_left\">","").replaceAll("<div class=\"tok_right\">","");
+                String s1 = s.replaceAll("</div>","*");
+                String[]st= s1.split("\\*");
+                for (int i=0;i<st.length;i++){
+                    Log.i("가즈아","시작"+i+"번");
+                    try {
+                        String mass = st[i];
+                        if(!mass.contains(nick)){
+                            Chat chat = new Chat();
+                            chat.setDetachNo(0);
+                            chat.setErcno(erno);
+                            chat.setMessage(mass);
+                            mChat.add(chat);
+                        }
+                        if(mass.contains(nick)){
+                            Chat chat = new Chat();
+                            chat.setDetachNo(1);
+                            chat.setUsername(username);
+                            chat.setErcno(erno);
+                            chat.setMessage(mass);
+                            mChat.add(chat);
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e){
                     }
 
                 }
-
+                messageAdapter.notifyDataSetChanged();
             }
         }
     }

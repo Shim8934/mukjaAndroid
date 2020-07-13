@@ -2,6 +2,7 @@ package com.kosmo.mukja.fcm;
 
 import android.content.Context;
 
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,17 +24,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private Context mContext;
     private List<Chat> mChat;
     private String imageUrl;
-
+    String userName;
+    String nick;
     public MessageAdapter(Context mContext,List<Chat> mChat,String imageUrl){
         this.mChat=mChat;
         this.mContext=mContext;
         this.imageUrl=imageUrl;
-
     }
 
     @NonNull
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        SharedPreferences preferences = mContext.getSharedPreferences("loginInfo", mContext.MODE_PRIVATE);
+        userName = preferences.getString("username", null);
+        nick = preferences.getString("nick", null);
         if(viewType==MSG_TYPE_RIGT) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, parent, false);
             return new MessageAdapter.ViewHolder(view);
@@ -76,7 +80,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public int getItemViewType(int position) {
         if(mChat.get(position).getDetachNo()==1){
             return  MSG_TYPE_RIGT;
-        }else
-        {return  MSG_TYPE_LEFT;}
+        }
+        else{
+            return  MSG_TYPE_LEFT;
+        }
     }
 }

@@ -81,4 +81,7 @@ dependencies {
     implementation 'tech.gusavila92:java-android-websocket-client:1.2.2'
 
     implementation 'de.hdodenhof:circleimageview:3.0.1'
+
+
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 }

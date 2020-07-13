@@ -78,7 +78,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
     private Bundle avoid_codes = new Bundle();
     private Bundle prefer_codes = new Bundle();
     private String store_id;
-    public static final String ipAddr="192.168.0.6";
+    public static final String ipAddr="115.91.88.230";
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -135,7 +135,7 @@ public class TabContent2 extends Fragment   implements OnMapReadyCallback {
                     query +=mapkey+'='+prefer_codes.get(mapkey).toString()+"&";
                 }
                 Log.i("MyMarker",query);
-                new SearchMarkerAsyncTask().execute("http://"+ipAddr+":8080/mukja/getMarker.pbs",bukdonglat,bukdonglng,namsualat,namsualng,query);
+                new SearchMarkerAsyncTask().execute("http://"+ipAddr+":9998/mukja/getMarker.pbs",bukdonglat,bukdonglng,namsualat,namsualng,query);
             }
         });//searcher
 

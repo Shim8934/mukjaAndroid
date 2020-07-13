@@ -106,6 +106,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
         String times = dateArray[1].trim();
 
         Picasso.get().load(Uri.parse("http://115.91.88.230:9998/mukja" + intent.getStringExtra("img"))).resize(200, 100).into(Profile);
+
         titles.setText(intent.getStringExtra("title"));
         contents.setText(content);
         ages.setText(intent.getStringExtra("age"));
