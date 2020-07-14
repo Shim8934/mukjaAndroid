@@ -114,8 +114,19 @@ public class EroomAdapter extends BaseAdapter {
         goin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,ChatActivity.class);
-
+                Intent intent = new Intent(context,ViewDetailsActivity.class);
+                intent.putExtra("er_no",items.get(position).getEr_no());
+                intent.putExtra("store_id",items.get(position).getStore_id());
+                intent.putExtra("master",items.get(position).getEr_master());
+                intent.putExtra("img",items.get(position).getU_img());
+                intent.putExtra("title",items.get(position).getEr_title());
+                intent.putExtra("content",items.get(position).getEr_content());
+                intent.putExtra("nick",items.get(position).getU_nick());
+                intent.putExtra("age",items.get(position).getU_age());
+                intent.putExtra("max",items.get(position).getEr_max());
+                intent.putExtra("time",items.get(position).getEr_time());
+                intent.putExtra("tend",items.get(position).getEr_tend());
+                intent.putExtra("curr",items.get(position).getEr_curr());
                 context.startActivity(intent);
 
             }

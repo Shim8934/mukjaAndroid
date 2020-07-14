@@ -66,7 +66,7 @@ public class TabContent3 extends Fragment {
 
         SharedPreferences preferences = context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
         String username = preferences.getString("username", "defaultID");
-        new UserInfoAsyncTask().execute("http://"+ TabContent2.ipAddr +":9998/mukja/Andorid/User/UserInfo.do",username);
+        new UserInfoAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/Andorid/User/UserInfo.do",username);
 
         myreview.setOnClickListener(new View.OnClickListener() {
             @Override

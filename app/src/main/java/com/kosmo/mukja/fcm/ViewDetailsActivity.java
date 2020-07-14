@@ -349,13 +349,30 @@ public class ViewDetailsActivity extends AppCompatActivity {
                             builder.show();
                         }
                         if(rool==1){
-                            Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
-                            intent.putExtra("username",userName);
-                            intent.putExtra("er_no",er_no);
-                            intent.putExtra("ercno",ercno);
-                            intent.putExtra("nick",nick);
-                            startActivity(intent);
-                            finish();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
+                            builder.setMessage("참여중인 방입니다.\r\n입장하시겠습니까?");
+                            builder.setPositiveButton("취소",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            finish();
+                                        }
+                                    });
+                            builder.setPositiveButton("확인",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
+                                            intent.putExtra("username",userName);
+                                            intent.putExtra("er_no",er_no);
+                                            intent.putExtra("ercno",ercno);
+                                            intent.putExtra("nick",nick);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                            builder.show();
+
                         }
                         if(rool==-1){
                             AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
