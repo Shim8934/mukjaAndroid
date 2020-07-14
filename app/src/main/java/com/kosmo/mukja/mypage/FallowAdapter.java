@@ -91,7 +91,7 @@ public class FallowAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Log.i("MyMarker"," 클릭시 발생 ms_no:"+ ms_noList.get(position));
-                new FallowDeleteAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Android/DeleteAndroidFallow.do",ms_noList.get(position));
+                new FallowDeleteAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/Android/DeleteAndroidFallow.do",ms_noList.get(position));
                 Toast.makeText(context, "삭제하였습니다!", Toast.LENGTH_SHORT).show();
                 mItems.remove(position);
                 notifyDataSetChanged();

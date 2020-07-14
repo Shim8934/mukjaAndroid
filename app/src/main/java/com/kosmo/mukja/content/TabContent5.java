@@ -120,7 +120,7 @@ public class TabContent5 extends Fragment {
                     erdto.setEr_tend(chattingInfo.get("er_tend").toString().replaceAll("\"", ""));
                     erdto.setStore_name(chattingInfo.get("store_name").toString().replaceAll("\"", ""));
                     erdto.setEr_title(chattingInfo.get("er_title").toString().replaceAll("\"", ""));
-                    erdto.setEr_content(chattingInfo.get("er_content").toString().replaceAll("\"", ""));
+                    erdto.setEr_content(chattingInfo.get("er_content").toString().replaceAll("\"", "").replace("<p>", "").replace("</p>", ""));
                     erdto.setEr_max(chattingInfo.get("er_max").toString().replaceAll("\"", ""));
                     erdto.setMaster_img(chattingInfo.get("master_img").toString().replaceAll("\"", ""));
                     arrayList.add(erdto);

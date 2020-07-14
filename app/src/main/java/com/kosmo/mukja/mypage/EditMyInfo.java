@@ -199,7 +199,7 @@ public class EditMyInfo extends AppCompatActivity {
 
 
 
-        new GetMyInfoAsyncTask().execute("http://" + TabContent2.ipAddr + ":8080/mukja/Andorid/User/UserInfo.do", user_id);
+        new GetMyInfoAsyncTask().execute("http://" + TabContent2.ipAddr + "/mukja/Andorid/User/UserInfo.do", user_id);
 
 
     }//oncreate

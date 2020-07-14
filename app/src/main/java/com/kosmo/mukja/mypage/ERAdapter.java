@@ -99,7 +99,7 @@ public class ERAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Log.i("MyMarker"," 클릭시 발생 erjoin_num:"+ erjoin_num_List.get(position));
-                new RequestER_Accept().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Android/AndroidRequestER_Accept.do",erjoin_num_List.get(position));
+                new RequestER_Accept().execute("http://"+ TabContent2.ipAddr +"/mukja/Android/AndroidRequestER_Accept.do",erjoin_num_List.get(position));
                 Toast.makeText(context, "수락하였습니다!", Toast.LENGTH_SHORT).show();
                 mItems.remove(position);
                 notifyDataSetChanged();
@@ -109,7 +109,7 @@ public class ERAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Log.i("MyMarker"," 클릭시 발생 erjoin_num:"+ erjoin_num_List.get(position));
-                new RequestER_Reject().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Android/AndroidRequestER_Reject.do",erjoin_num_List.get(position));
+                new RequestER_Reject().execute("http://"+ TabContent2.ipAddr +"/mukja/Android/AndroidRequestER_Reject.do",erjoin_num_List.get(position));
                 Toast.makeText(context, "거절하였습니다!", Toast.LENGTH_SHORT).show();
                 mItems.remove(position);
                 notifyDataSetChanged();

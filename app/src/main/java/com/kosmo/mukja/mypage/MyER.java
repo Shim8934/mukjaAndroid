@@ -51,7 +51,7 @@ public class MyER extends AppCompatActivity {
             }
         });
 
-        new GetERListAsyncTask().execute("http://" + TabContent2.ipAddr + ":8080/mukja/Andorid/Store/MyER_list.do", user_id);
+        new GetERListAsyncTask().execute("http://" + TabContent2.ipAddr + "/mukja/Andorid/Store/MyER_list.do", user_id);
 
     }//oncreate
 
@@ -128,7 +128,7 @@ public class MyER extends AppCompatActivity {
                  String u_img="";
                  String u_id="";
                 if (my_erlist.get(i).getAsJsonObject().get("u_img") != null) {
-                    u_img = "http://192.168.0.6:8080/mukja" + my_erlist.get(i).getAsJsonObject().get("u_img").toString().replaceAll("\"", "");
+                    u_img = "http://"+TabContent2.ipAddr+"/mukja" + my_erlist.get(i).getAsJsonObject().get("u_img").toString().replaceAll("\"", "");
                 }
                 Log.i("MyMarker", "[참여한er u_img] : " + u_img);
 

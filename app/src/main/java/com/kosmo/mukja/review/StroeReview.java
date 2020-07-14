@@ -52,7 +52,7 @@ public class StroeReview extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
         user_id = preferences.getString("username", "defaultID");
-        new ReviewAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Andorid/Store/Review.do",store_id,user_id);
+        new ReviewAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/Andorid/Store/Review.do",store_id,user_id);
         storeClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,7 +129,7 @@ public class StroeReview extends AppCompatActivity {
             for(int i=0; i<review.size(); i++){
                 String reviewProfile = "";
                 if(review.get(i).getAsJsonObject().get("u_img")!=null) {
-                    reviewProfile= "http://192.168.0.6:8080/mukja"+review.get(i).getAsJsonObject().get("u_img").toString().replaceAll("\"","");
+                    reviewProfile= "http://"+TabContent2.ipAddr+"/mukja"+review.get(i).getAsJsonObject().get("u_img").toString().replaceAll("\"","");
                 }
                 Log.i("MyMarker","[리뷰 reviewProfile] : "+reviewProfile);
 
@@ -141,7 +141,7 @@ public class StroeReview extends AppCompatActivity {
 
                 String reviewIMG = "";
                 if(review.get(i).getAsJsonObject().get("rf_path")!=null) {
-                    reviewIMG= "http://192.168.0.6:8080/mukja"+review.get(i).getAsJsonObject().get("rf_path").toString().split(",")[0].replaceAll("\"","");
+                    reviewIMG= "http://"+TabContent2.ipAddr+"/mukja"+review.get(i).getAsJsonObject().get("rf_path").toString().split(",")[0].replaceAll("\"","");
                 }
                 Log.i("MyMarker","[리뷰 reviewIMG] : "+reviewIMG);
 

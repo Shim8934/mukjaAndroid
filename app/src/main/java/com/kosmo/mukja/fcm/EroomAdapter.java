@@ -4,7 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,6 +108,13 @@ public class EroomAdapter extends BaseAdapter {
 
         ImageView itemIcon = convertView.findViewById(R.id.itemicon);
         Picasso.get().load(Uri.parse("http://115.91.88.230:9998/mukja" + items.get(position).getU_img())).into(itemIcon);
+
+
+
+        itemIcon.setBackground(new ShapeDrawable(new OvalShape()));
+        if(Build.VERSION.SDK_INT >= 21) {
+            itemIcon.setClipToOutline(true);
+        }
         //텍스트뷰 위젯 얻고 데이터 설정]
         final TextView textName = convertView.findViewById(R.id.itemTextName);
         textName.setText(" 제목: " + items.get(position).getEr_title());

@@ -121,7 +121,7 @@ public class MyERAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Log.i("MyMarker"," 클릭시 발생 erjoin_num:"+ er_no_List.get(position));
 
-                new deleteERMembers().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Android/DeleteERMembers.do",er_no_List.get(position),user_id);
+                new deleteERMembers().execute("http://"+ TabContent2.ipAddr +"/mukja/Android/DeleteERMembers.do",er_no_List.get(position),user_id);
                 Toast.makeText(context, "모임에서 탈퇴하셨어요!", Toast.LENGTH_SHORT).show();
                 mItems.remove(position);
                 notifyDataSetChanged();
@@ -131,7 +131,7 @@ public class MyERAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Log.i("MyMarker"," 클릭시 발생 erjoin_num:"+ er_no_List.get(position));
-                new BoomMyER().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Android/BoomMyER.do",er_no_List.get(position),user_id);
+                new BoomMyER().execute("http://"+ TabContent2.ipAddr +"/mukja/Android/BoomMyER.do",er_no_List.get(position),user_id);
 
                 Toast.makeText(context, "내 모임을 삭제 했어요!", Toast.LENGTH_SHORT).show();
                 mItems.remove(position);

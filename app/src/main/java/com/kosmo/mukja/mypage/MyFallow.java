@@ -51,7 +51,7 @@ public class MyFallow extends AppCompatActivity {
                 finish();
             }
         });
-        new FallowListAsyncTask().execute("http://" + TabContent2.ipAddr + ":8080/mukja/Andorid/Store/FallowList.do", user_id);
+        new FallowListAsyncTask().execute("http://" + TabContent2.ipAddr + "/mukja/Andorid/Store/FallowList.do", user_id);
 
     }//oncreate
 
@@ -115,7 +115,7 @@ public class MyFallow extends AppCompatActivity {
             for (int i = 0; i < mystore.size(); i++) {
                 String ms_img = "";
                 if (mystore.get(i).getAsJsonObject().get("ms_img") != null) {
-                    ms_img = "http://192.168.0.6:8080/mukja" + mystore.get(i).getAsJsonObject().get("ms_img").toString().replaceAll("\"", "");
+                    ms_img = "http://"+TabContent2.ipAddr+"/mukja" + mystore.get(i).getAsJsonObject().get("ms_img").toString().replaceAll("\"", "");
                 }
                 Log.i("MyMarker", "[찜 ms_img] : " + ms_img);
 

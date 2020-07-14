@@ -2,7 +2,10 @@ package com.kosmo.mukja.fcm;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +59,17 @@ public class ChattingListAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.activity_eroom_item, null);
         }
         ImageView itemIcon = convertView.findViewById(R.id.itemicon);
+
         Picasso.get().load(Uri.parse("http://115.91.88.230:9998/mukja" + items.get(position).getMaster_img())).into(itemIcon);
+
+        itemIcon.setBackground(new ShapeDrawable(new OvalShape()));
+        if(Build.VERSION.SDK_INT >= 21) {
+            itemIcon.setClipToOutline(true);
+        }
+
+
+
+
         final TextView textName = convertView.findViewById(R.id.itemTextName);
         textName.setText(" 제목: " + items.get(position).getEr_title());
         final TextView textDept = convertView.findViewById(R.id.itemTextDept);
@@ -71,7 +84,7 @@ public class ChattingListAdapter extends BaseAdapter {
                 intent.putExtra("master",items.get(position).getEr_master());
                 intent.putExtra("img",items.get(position).getMaster_img());
                 intent.putExtra("title",items.get(position).getEr_title());
-                intent.putExtra("content",items.get(position).getEr_content());
+                intent.putExtra("content",items.get(position).getEr_content().replace("<p>", "").replace("</p>", ""));
                 intent.putExtra("nick",items.get(position).getMaster_nick());
                 intent.putExtra("age",items.get(position).getU_age());
                 intent.putExtra("max",items.get(position).getEr_max());

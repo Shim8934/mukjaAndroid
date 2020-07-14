@@ -33,6 +33,7 @@ import com.google.gson.JsonParser;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.kosmo.mukja.R;
+import com.kosmo.mukja.content.TabContent2;
 
 import java.io.File;
 import java.util.List;
@@ -171,7 +172,7 @@ public class InsertReview extends AppCompatActivity {
 
         @Override
         protected  List<String> doInBackground(String... params) {
-            String serverURL="http://192.168.0.6:8080/mukja/Android/insertReview.do";
+            String serverURL="http://"+ TabContent2.ipAddr +"/mukja/Android/insertReview.do";
             List<String> result = uploadMedia(selectedUri.getPath(),serverURL);
 
         return result;

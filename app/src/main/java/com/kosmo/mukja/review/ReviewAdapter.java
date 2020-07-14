@@ -99,7 +99,7 @@ public class ReviewAdapter extends BaseAdapter {
                 Log.i("MyMarker"," 작성자 id:"+ id_List.get(position));
                 if(id_List.get(position).equals(myid)){
                     Log.i("MyMarker"," 클릭시 발생 rv_no:"+ rv_noList.get(position));
-                    //new ReviewDeleteAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Android/DeleteReview.do",rv_noList.get(position));
+                    //new ReviewDeleteAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/Android/DeleteReview.do",rv_noList.get(position));
                     Toast.makeText(context, "삭제하였습니다!", Toast.LENGTH_SHORT).show();
                     mItems.remove(position);
                     notifyDataSetChanged();

@@ -46,7 +46,7 @@ public class AddrList extends AppCompatActivity {
         String search_text=addrInent.getStringExtra("search_text");
         Log.i("MyMarker","찾은 내용:"+search_text);
         context=AddrList.this;
-        new SearchPlaceAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Search/Place.do",search_text);
+        new SearchPlaceAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/Search/Place.do",search_text);
 
         ListView listview = (ListView)findViewById(R.id.listView);
 

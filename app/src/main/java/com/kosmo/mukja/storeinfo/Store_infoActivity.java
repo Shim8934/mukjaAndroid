@@ -117,17 +117,17 @@ public class Store_infoActivity extends AppCompatActivity {
         Log.i("MyMarker","스토어디테일 user_id:"+user_id);
 
 
-        new GetStoreInfoAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Andorid/Store/DetailView.do",store_id,user_id);
+        new GetStoreInfoAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/Andorid/Store/DetailView.do",store_id,user_id);
 
         likeToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(likeToggle.isChecked()){
                     likeToggle.setBackgroundDrawable(getResources().getDrawable(R.drawable.andorid_thumb_c));
-                    new ThumbAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/updateStoreRecommand.do",store_id,user_id);
+                    new ThumbAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/updateStoreRecommand.do",store_id,user_id);
                 }else{
                     likeToggle.setBackgroundDrawable(getResources().getDrawable(R.drawable.andorid_thumb_b));
-                    new ThumbAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/updateStoreRecommand.do",store_id,user_id);
+                    new ThumbAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/updateStoreRecommand.do",store_id,user_id);
                 }
             }//onClick
         });//setOnClickListener
@@ -136,7 +136,7 @@ public class Store_infoActivity extends AppCompatActivity {
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
                 String starcount =String.valueOf((int)v);
                 Log.i("MyMarker"," starcount:"+starcount);
-                new RatingAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/updateStoreAvg.do",store_id,user_id,starcount);
+                new RatingAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/updateStoreAvg.do",store_id,user_id,starcount);
             }
         });
         store_close.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +158,7 @@ public class Store_infoActivity extends AppCompatActivity {
         tvFallow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new FallowAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Android/Fallow.do",store_id,user_id);
+                new FallowAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/Android/Fallow.do",store_id,user_id);
             }
         });
 
@@ -414,7 +414,7 @@ public class Store_infoActivity extends AppCompatActivity {
             JsonArray imgJsonArray =  storeinfoJson.getAsJsonArray("store_imgList");
             ArrayList<String>  arrayList = new ArrayList<String>();
             for(int i=0;i<imgJsonArray.size();i++){
-                arrayList.add("http://192.168.0.6:8080/mukja"+(imgJsonArray.get(i).toString().replaceAll("\"","")));
+                arrayList.add("http://"+TabContent2.ipAddr+"/mukja"+(imgJsonArray.get(i).toString().replaceAll("\"","")));
             }
 
 

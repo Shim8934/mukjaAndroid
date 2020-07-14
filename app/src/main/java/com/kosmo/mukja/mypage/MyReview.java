@@ -58,7 +58,7 @@ public class MyReview extends AppCompatActivity {
                 finish();
             }
         });
-        new MyReviewAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/Andorid/Store/MyReview.do",username);
+        new MyReviewAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/Andorid/Store/MyReview.do",username);
     }//oncreate
 
     private class MyReviewAsyncTask extends AsyncTask<String,Void,String> {
@@ -117,7 +117,7 @@ public class MyReview extends AppCompatActivity {
             for(int i=0; i<review.size(); i++){
                 String reviewProfile = "";
                 if(review.get(i).getAsJsonObject().get("u_img")!=null) {
-                    reviewProfile= "http://192.168.0.6:8080/mukja"+review.get(i).getAsJsonObject().get("u_img").toString().replaceAll("\"","");
+                    reviewProfile= "http://"+TabContent2.ipAddr+"/mukja"+review.get(i).getAsJsonObject().get("u_img").toString().replaceAll("\"","");
                 }
                 Log.i("MyMarker","[마이리뷰 reviewProfile] : "+reviewProfile);
 
@@ -129,7 +129,7 @@ public class MyReview extends AppCompatActivity {
 
                 String reviewIMG = "";
                 if(review.get(i).getAsJsonObject().get("rf_path")!=null) {
-                    reviewIMG= "http://192.168.0.6:8080/mukja"+review.get(i).getAsJsonObject().get("rf_path").toString().replaceAll("\"","");
+                    reviewIMG= "http://"+TabContent2.ipAddr+"/mukja"+review.get(i).getAsJsonObject().get("rf_path").toString().replaceAll("\"","");
                 }
                 Log.i("MyMarker","[마이리뷰 reviewIMG] : "+reviewIMG);
 

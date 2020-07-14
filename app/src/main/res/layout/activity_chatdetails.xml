@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#ffffff"
     android:padding="20dp"
     >
 
@@ -16,9 +17,10 @@
         >
         <TextView
             android:id="@+id/filterText"
+            android:text="같이먹자 모임 상세보기"
+
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="같이먹자 모임 상세보기"
             android:layout_marginLeft="5dp"
             android:gravity="center"
             android:textColor="#393939"
@@ -44,13 +46,20 @@
         android:orientation="horizontal"
         android:gravity="center"
         >
-        <ImageView
+        <LinearLayout
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/Profile"
-            android:layout_gravity="center"
-            android:background="#E6E6E6"
-            />
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Profile"
+                android:layout_gravity="center"
+                android:background="#E6E6E6"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -60,66 +69,66 @@
         android:orientation="horizontal"
         >
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.1"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
             android:text="제목:"
-            android:textColor="#393939"
-            android:gravity="center|right"
-            android:textSize="18dp"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7"
-            android:background="@null"
-            android:maxLength="20"
-            android:maxLines="1"
-            android:textSize="20dp"
-
+            android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:textColor="@android:color/black"
+            android:textColor="#393939"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:textSize="18dp"
+
+            />
+
+        <TextView
             android:id="@+id/titles"
-            android:gravity="left|center"
-            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#393939"
+            android:textSize="20dp"
+            android:layout_marginRight="10dp"
             />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".7"
+        android:layout_height="50dp"
         android:layout_marginTop="-1dp"
         android:paddingTop="10dp"
-        android:layout_marginBottom="10dp"
         >
+
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.1"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="내용:"
-            android:textSize="18dp"
             android:textColor="#393939"
-            android:gravity="right"
-            >
-        </TextView>
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            />
+
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7"
-            android:background="@null"
-            android:gravity="top"
+            android:id="@+id/contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:maxLength="50"
             android:textColor="#393939"
             android:textSize="20dp"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/contents"
-            android:paddingLeft="5dp"
-            android:layout_marginBottom="10dp"
             />
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#ECECEC" />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -129,47 +138,48 @@
         android:layout_marginBottom="10dp"
         >
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".4"
-            android:text="나이"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="시간:"
+            android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#393939"
-            android:textSize="18dp"
-            >
-        </TextView>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.1"
-            android:gravity="center"
-            android:textColor="#393939"
-            android:textSize="20dp"
-
             android:layout_marginLeft="10dp"
-            android:id="@+id/ages"
-            >
-        </TextView>
+            android:textSize="18dp"
+            />
+
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".4"
-            android:text="인원"
+            android:id="@+id/time"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="#393939"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            />
+
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="인원:"
+            android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#393939"
             android:textSize="18dp"
             >
         </TextView>
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="#393939"
             android:textSize="20dp"
+            android:layout_gravity="center"
             android:id="@+id/max"
-
+            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             >
         </TextView>
@@ -182,47 +192,50 @@
         android:layout_marginBottom="10dp"
         >
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".4"
-            android:text="날짜"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="날짜:"
+            android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#393939"
             android:textSize="18dp"
-
+            android:layout_marginLeft="10dp"
             />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.1"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
             android:textColor="#393939"
             android:textSize="18dp"
+
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
             android:gravity="center"
             android:layout_marginLeft="10dp"
             android:id="@+id/date"
             />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".4"
-            android:text="시간"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="나이:"
+            android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#393939"
             android:textSize="18dp"
             />
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.1"
-            android:textColor="@android:color/black"
-            android:textSize="20dp"
-            android:gravity="center"
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#393939"
+            android:textSize="20dp"
+            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
+            android:id="@+id/ages"
             />
     </LinearLayout>
 
@@ -244,6 +257,7 @@
             android:gravity="center"
             android:textColor="#393939"
             android:textSize="18dp"
+            android:textStyle="bold"
             android:text="모임 기피재료"
             />
     </LinearLayout>
@@ -391,12 +405,12 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".5"
-        android:orientation="horizontal"
-        >
-    </LinearLayout>
+        android:layout_height="2dp"
+        android:layout_marginBottom="10dp"
+        android:background="#ECECEC" />
+
 </LinearLayout>
+
 

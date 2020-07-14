@@ -59,9 +59,9 @@ public class RealTimeTableInfo_Activity  extends AppCompatActivity {
 
         context=RealTimeTableInfo_Activity.this;
 
-        new RealtimeInitAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/getRealTimeReservation.do",store_id);
+        new RealtimeInitAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/getRealTimeReservation.do",store_id);
 
-        new RealtimeUpdateAsyncTask().execute("http://"+ TabContent2.ipAddr +":8080/mukja/getRealTimeReservation.do",store_id);
+        new RealtimeUpdateAsyncTask().execute("http://"+ TabContent2.ipAddr +"/mukja/getRealTimeReservation.do",store_id);
     }
 
     //서버로 데이타 전송 및 응답을 받기 위한 스레드 정의

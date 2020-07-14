@@ -3,24 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#ffffff"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_height="50dp"
         android:background="@drawable/testt"
         android:orientation="horizontal">
 
         <TextView
+            android:text="같이먹자 모임 생성하기"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:gravity="center"
-            android:text="같이먹자 모임 생성하기"
-            android:textColor="#303030"
-            android:textSize="22dp"
-            android:textStyle="bold" />
+            android:textColor="#393939"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,65 +39,71 @@
                 android:background="@drawable/close" />
         </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.35"
-        android:background="@drawable/testt"
-        android:orientation="horizontal">
-
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+        >
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.1"
-            android:gravity="center|right"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
             android:text="제목:"
-            android:textColor="@android:color/black"
-            android:textSize="20dp"/>
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:textColor="#393939"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:textSize="18dp"
+
+            />
 
         <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7"
-            android:background="@null"
-            android:hint=" 제목을 입력해주세요(20자)"
-            android:maxLength="20"
-            android:maxLines="1"
-            android:textSize="18dp"
             android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#393939"
+            android:textSize="20dp"
+            android:hint=" 제목을 입력해주세요(20자)"
+            android:background="@null"
+            android:layout_marginRight="10dp"
             />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:layout_marginTop="-1dp"
-        android:layout_weight=".8"
-        android:background="@drawable/testt"
-        android:paddingTop="10dp">
+        android:paddingTop="10dp"
+        >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.1"
-            android:gravity="right"
             android:text="내용:"
-            android:textColor="@android:color/black"
-            android:textSize="20dp"/>
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#393939"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            />
 
         <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#393939"
+            android:textSize="20dp"
             android:background="@null"
             android:gravity="top"
             android:hint=" 내용을 입력해주세요(50자)"
             android:maxLength="50"
-            android:id="@+id/content"
             />
-
     </LinearLayout>
 
     <LinearLayout
@@ -106,29 +115,38 @@
         android:weightSum="3">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:text="최대인원"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="최대인원:"
-            android:textColor="@android:color/black"
-            android:textSize="20dp"/>
+            android:textColor="#393939"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            >
+            <com.gildaswise.horizontalcounter.HorizontalCounter
+                android:id="@+id/horizontalCounter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
+                app:displayAsInteger="true"
+                app:initialValue="1"
+                app:maxValue="100"
+                app:minValue="1"
+                app:minusButtonColor="#F44336"
+                app:plusButtonColor="#2196F3"
+                app:stepValue="1"
+                app:textColor="#009688"
+                app:textSize="10dp" />
+        </LinearLayout>
 
-        <com.gildaswise.horizontalcounter.HorizontalCounter
-            android:id="@+id/horizontalCounter"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            app:displayAsInteger="true"
-            app:initialValue="1"
-            app:maxValue="100"
-            app:minValue="1"
-            app:minusButtonColor="#F44336"
-            app:plusButtonColor="#2196F3"
-            app:stepValue="1"
-            app:textColor="#009688"
-            app:textSize="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -138,13 +156,15 @@
         android:background="@drawable/testt">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:text="모임일:"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="모 임 일:"
-            android:textColor="@android:color/black"
-            android:textSize="20dp" />
+            android:textColor="#393939"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            />
 
         <TextView
             android:id="@+id/datepicker"
@@ -164,13 +184,15 @@
         android:background="@drawable/testt">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:text="모임시간:"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="모 임 시 간:"
-            android:textColor="@android:color/black"
-            android:textSize="20dp" />
+            android:textColor="#393939"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            />
 
         <TextView
             android:id="@+id/timepicker"
@@ -187,27 +209,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".3"
-        android:background="@drawable/testt">
+        android:layout_weight=".4"
+        >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:textColor="@android:color/black"
-            android:textSize="20dp"
             android:text="기피재료를 골라주세요"
-            />
-
-
+            android:textColor="#393939"
+            android:textSize="18dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/testt">
+        >
 
 
 
@@ -215,69 +235,73 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center"
+                >
 
                 <ToggleButton
                     android:id="@+id/btnBD"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/db_b"
                     android:checked="true"
                     android:padding="-10dp"
                     android:textOff=""
-                    android:textOn="" />
+                    android:textOn=""
+                    android:layout_marginRight="10dp"
+                    />
 
                 <ToggleButton
                     android:id="@+id/btnCW"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/cw_b"
                     android:checked="true"
                     android:textOff=""
+                    android:layout_marginRight="10dp"
                     android:textOn="" />
 
                 <ToggleButton
                     android:id="@+id/btnDP"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/dp_b"
                     android:checked="true"
                     android:textOff=""
+                    android:layout_marginRight="10dp"
                     android:textOn="" />
 
                 <ToggleButton
                     android:id="@+id/btnEG"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/eg_b"
                     android:checked="true"
                     android:textOff=""
+                    android:layout_marginRight="10dp"
                     android:textOn="" />
 
                 <ToggleButton
                     android:id="@+id/btnFL"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/fl_b"
                     android:checked="true"
                     android:textOff=""
+                    android:layout_marginRight="10dp"
                     android:textOn="" />
 
                 <ToggleButton
                     android:id="@+id/btnFS"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/fs_b"
                     android:checked="true"
                     android:textOff=""
@@ -287,40 +311,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".2"
-                    android:checked="true"
-                    android:padding="-10dp"
-                    />
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                >
+
                 <ToggleButton
                     android:id="@+id/btnMK"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/mk_b"
                     android:checked="true"
                     android:textOff=""
+                    android:layout_marginRight="10dp"
                     android:textOn="" />
 
                 <ToggleButton
                     android:id="@+id/btnPE"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/pe_b"
                     android:checked="true"
                     android:textOff=""
+                    android:layout_marginRight="10dp"
                     android:textOn="" />
 
                 <ToggleButton
                     android:id="@+id/btnPK"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/pk_b"
                     android:checked="true"
                     android:textOff=""
@@ -328,43 +348,43 @@
 
                 <ToggleButton
                     android:id="@+id/btnSB"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_height="50dp"
                     android:background="@drawable/sb_b"
                     android:checked="true"
                     android:textOff=""
-                    android:textOn="" />
+                    android:textOn=""
+                    android:layout_width="50dp" />
 
                 <ToggleButton
                     android:id="@+id/btnSF"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/sf_b"
                     android:checked="true"
                     android:textOff=""
                     android:textOn="" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".2"
-                    android:checked="true"
-                    android:padding="-10dp"
-                    />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/darker_gray"
-        android:orientation="horizontal">
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        >
         <Button
             android:id="@+id/createRoom_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="채팅방 생성하기" />
+            android:background="#F8A740"
+            android:text="채팅방 생성하기"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textStyle="bold"
+
+            />
     </LinearLayout>
 </LinearLayout>
 

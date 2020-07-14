@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.service.autofill.UserData;
@@ -159,7 +162,12 @@ public class ViewDetailsActivity extends AppCompatActivity {
         String dates = dateArray[0] + "일";
         String times = dateArray[1].trim();
 
-        Picasso.get().load(Uri.parse("http://115.91.88.230:9998/mukja" + intent.getStringExtra("img"))).resize(200, 100).into(Profile);
+        Picasso.get().load(Uri.parse("http://115.91.88.230:9998/mukja" + intent.getStringExtra("img"))).into(Profile);
+        Profile.setBackground(new ShapeDrawable(new OvalShape()));
+        if(Build.VERSION.SDK_INT >= 21) {
+            Profile.setClipToOutline(true);
+        }
+
         titles.setText(intent.getStringExtra("title"));
         contents.setText(content);
         ages.setText(intent.getStringExtra("age"));
