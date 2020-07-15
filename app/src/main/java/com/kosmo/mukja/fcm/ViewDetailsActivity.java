@@ -1,7 +1,6 @@
 package com.kosmo.mukja.fcm;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.service.autofill.UserData;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -29,15 +28,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.kosmo.mukja.R;
 import com.squareup.picasso.Picasso;
 
@@ -84,9 +79,11 @@ public class ViewDetailsActivity extends AppCompatActivity {
     String token;
     String nick;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference=firebaseDatabase.getReference();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
     private static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
     private static final String SERVER_KEY = "AAAA5H8D1I0:APA91bGPoVtK3F4TgPFwS0tQVhJyjOy3ahaafxUbzFY8N2VIjmaHMLdyVnET-3ZSrvgD_rUuafFhLgQFQTtaCyas8yoe7ydoYRsXEktdQ5GdXRtprguoR14tpPUh-AMaLMXtoKpE_O1d";
+    private TextView max;
+    private Button creatRoomBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,10 +98,10 @@ public class ViewDetailsActivity extends AppCompatActivity {
         getWindow().getAttributes().height = height;
         Intent intent = getIntent();
         initView();
-        er_no=intent.getIntExtra("er_no",0);
-        store_id=intent.getStringExtra("store_id");
-        nick=intent.getStringExtra("nick").toString();
-        Log.i("가즈아",store_id);
+        er_no = intent.getIntExtra("er_no", 0);
+        store_id = intent.getStringExtra("store_id");
+        nick = intent.getStringExtra("nick").toString();
+        Log.i("가즈아", store_id);
 
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,15 +113,15 @@ public class ViewDetailsActivity extends AppCompatActivity {
         JoinRoomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
-                userName = preferences.getString("username",null);
-                Log.i("가즈아",userName);
-                userToken = preferences.getString("token",null);
-                Log.i("가즈아",userToken);
-                master =intent.getStringExtra("master");
-                Log.i("가즈아",master);
+                SharedPreferences preferences = getSharedPreferences("loginInfo", MODE_PRIVATE);
+                userName = preferences.getString("username", null);
+                Log.i("가즈아", userName);
+                userToken = preferences.getString("token", null);
+                Log.i("가즈아", userToken);
+                master = intent.getStringExtra("master");
+                Log.i("가즈아", master);
 
-                if(userName.equals(master)){
+                if (userName.equals(master)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
                     builder.setMessage("내가 만든 채팅방입니다.");
                     builder.setPositiveButton("확인",
@@ -133,21 +130,20 @@ public class ViewDetailsActivity extends AppCompatActivity {
                                 }
                             });
                     builder.show();
-                }
-                else{
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
                     builder.setMessage("참여하시겠습니까?");
                     builder.setPositiveButton("예",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                ViewDetailsActivity.Details asyncTask = new ViewDetailsActivity.Details();
-                                asyncTask.execute();
+                                    Details asyncTask = new Details();
+                                    asyncTask.execute();
                                 }
                             });
                     builder.setNegativeButton("아니오",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(getApplicationContext(),"아니오를 선택했습니다.",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "아니오를 선택했습니다.", Toast.LENGTH_LONG).show();
                                 }
                             });
                     builder.show();
@@ -164,77 +160,78 @@ public class ViewDetailsActivity extends AppCompatActivity {
 
         Picasso.get().load(Uri.parse("http://115.91.88.230:9998/mukja" + intent.getStringExtra("img"))).into(Profile);
         Profile.setBackground(new ShapeDrawable(new OvalShape()));
-        if(Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= 21) {
             Profile.setClipToOutline(true);
         }
 
         titles.setText(intent.getStringExtra("title"));
+        contents.setMovementMethod(ScrollingMovementMethod.getInstance());
         contents.setText(content);
         ages.setText(intent.getStringExtra("age"));
         maxs.setText(intent.getStringExtra("max"));
         date.setText(dates);
         time.setText(times);
         String tens = intent.getStringExtra("tend");
-        Log.i("가즈아",tens);
+        Log.i("가즈아", tens);
 
-        if(tens.indexOf("BD")!=-1) {
+        if (tens.indexOf("BD") != -1) {
             btnBD.setChecked(true);
             btnBD.setBackgroundDrawable(getResources().getDrawable(R.drawable.db_c));
         }
 
-        if(tens.indexOf("CW")!=-1) {
+        if (tens.indexOf("CW") != -1) {
             btnCW.setChecked(true);
             btnCW.setBackgroundDrawable(getResources().getDrawable(R.drawable.cw_c));
         }
 
-        if(tens.indexOf("DP")!=-1) {
+        if (tens.indexOf("DP") != -1) {
             btnDP.setChecked(true);
             btnDP.setBackgroundDrawable(getResources().getDrawable(R.drawable.dp_c));
         }
 
-        if(tens.indexOf("EG")!=-1) {
+        if (tens.indexOf("EG") != -1) {
             btnEG.setChecked(true);
             btnEG.setBackgroundDrawable(getResources().getDrawable(R.drawable.eg_c));
         }
 
-        if(tens.indexOf("FL")!=-1) {
+        if (tens.indexOf("FL") != -1) {
             btnFL.setChecked(true);
             btnFL.setBackgroundDrawable(getResources().getDrawable(R.drawable.fl_c));
         }
 
-        if(tens.indexOf("FS")!=-1) {
+        if (tens.indexOf("FS") != -1) {
             btnFS.setChecked(true);
             btnFS.setBackgroundDrawable(getResources().getDrawable(R.drawable.fs_c));
         }
 
-        if(tens.indexOf("MK")!=-1) {
+        if (tens.indexOf("MK") != -1) {
             btnMK.setChecked(true);
             btnMK.setBackgroundDrawable(getResources().getDrawable(R.drawable.mk_c));
         }
 
-        if(tens.indexOf("PE")!=-1) {
+        if (tens.indexOf("PE") != -1) {
             btnPE.setChecked(true);
             btnPE.setBackgroundDrawable(getResources().getDrawable(R.drawable.pe_c));
         }
 
-        if(tens.indexOf("PK")!=-1) {
+        if (tens.indexOf("PK") != -1) {
             btnPK.setChecked(true);
             btnPK.setBackgroundDrawable(getResources().getDrawable(R.drawable.pk_c));
         }
 
-        if(tens.indexOf("SB")!=-1) {
+        if (tens.indexOf("SB") != -1) {
             btnSB.setChecked(true);
             btnSB.setBackgroundDrawable(getResources().getDrawable(R.drawable.sb_c));
         }
 
-        if(tens.indexOf("SF")!=-1) {
+        if (tens.indexOf("SF") != -1) {
             btnSF.setChecked(true);
             btnSF.setBackgroundDrawable(getResources().getDrawable(R.drawable.sf_c));
         }
 
 
-
     }
+
     //서버로 데이타 전송 및 응답을 받기 위한 스레드 정의
     private class Details extends AsyncTask<String, Void, String> {
 
@@ -243,7 +240,7 @@ public class ViewDetailsActivity extends AppCompatActivity {
             StringBuffer buf = new StringBuffer();
 
             try {
-                URL url = new URL(String.format("http://115.91.88.230:9998/mukja/ERoomjoin.do?er_no=%s&username=%s&store_id=%s",er_no,userName,store_id));
+                URL url = new URL(String.format("http://115.91.88.230:9998/mukja/ERoomjoin.do?er_no=%s&username=%s&store_id=%s", er_no, userName, store_id));
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 //서버에 요청 및 응답코드 받기
                 int responseCode = conn.getResponseCode();
@@ -270,15 +267,15 @@ public class ViewDetailsActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             Log.i("ERoom", result);
 
-            if(result!=null) {
+            if (result != null) {
                 try {
                     JSONObject json = new JSONObject(result);
-                    int no =Integer.parseInt(json.getString("joinER"));
-                    Log.i("가즈아",""+no);
+                    int no = Integer.parseInt(json.getString("joinER"));
+                    Log.i("가즈아", "" + no);
                     int rool = Integer.parseInt(json.getString("selectrool"));
-                    Log.i("가즈아",""+rool);
-                    int ercno =Integer.parseInt(json.getString("erc_no"));
-                    if(no==1){
+                    Log.i("가즈아", "" + rool);
+                    int ercno = Integer.parseInt(json.getString("erc_no"));
+                    if (no == 1) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
                         builder.setMessage("신청이 완료되었습니다.");
                         builder.setPositiveButton("확인",
@@ -298,7 +295,7 @@ public class ViewDetailsActivity extends AppCompatActivity {
                                                         String token = tokena[i];
                                                         if (token.indexOf(keys[0]) != -1) {
                                                             String[] t = token.split("=");
-                                                            userToken=t[1];
+                                                            userToken = t[1];
                                                         }
                                                     }
                                                     new Thread(new Runnable() {
@@ -308,10 +305,10 @@ public class ViewDetailsActivity extends AppCompatActivity {
                                                                 // FMC 메시지 생성 start
                                                                 JSONObject root = new JSONObject();
                                                                 JSONObject notification = new JSONObject();
-                                                                notification.put("body", userName+"님이 모임에 참여신청하였습니다.");
+                                                                notification.put("body", userName + "님이 모임에 참여신청하였습니다.");
                                                                 notification.put("title", getString(R.string.app_name));
                                                                 root.put("notification", notification);
-                                                                Log.i("가즈아",userToken);
+                                                                Log.i("가즈아", userToken);
                                                                 root.put("to", userToken);
                                                                 // FMC 메시지 생성 end
                                                                 URL Url = new URL(FCM_MESSAGE_URL);
@@ -333,9 +330,9 @@ public class ViewDetailsActivity extends AppCompatActivity {
                                                     }).start();
 
 
-
                                                 }
                                             }
+
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -344,9 +341,8 @@ public class ViewDetailsActivity extends AppCompatActivity {
                                     }
                                 });
                         builder.show();
-                    }
-                    else{
-                        if(rool==0){
+                    } else {
+                        if (rool == 0) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
                             builder.setMessage("수락 대기중입니다.");
                             builder.setPositiveButton("확인",
@@ -356,7 +352,7 @@ public class ViewDetailsActivity extends AppCompatActivity {
                                     });
                             builder.show();
                         }
-                        if(rool==1){
+                        if (rool == 1) {
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
                             builder.setMessage("참여중인 방입니다.\r\n입장하시겠습니까?");
@@ -370,11 +366,11 @@ public class ViewDetailsActivity extends AppCompatActivity {
                             builder.setPositiveButton("확인",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
-                                            intent.putExtra("username",userName);
-                                            intent.putExtra("er_no",er_no);
-                                            intent.putExtra("ercno",ercno);
-                                            intent.putExtra("nick",nick);
+                                            Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                                            intent.putExtra("username", userName);
+                                            intent.putExtra("er_no", er_no);
+                                            intent.putExtra("ercno", ercno);
+                                            intent.putExtra("nick", nick);
                                             startActivity(intent);
                                             finish();
                                         }
@@ -382,7 +378,7 @@ public class ViewDetailsActivity extends AppCompatActivity {
                             builder.show();
 
                         }
-                        if(rool==-1){
+                        if (rool == -1) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(ViewDetailsActivity.this);
                             builder.setMessage("거절되었습니다.");
                             builder.setPositiveButton("확인",
@@ -400,7 +396,6 @@ public class ViewDetailsActivity extends AppCompatActivity {
         }
 
     }///////////////AsyncTask
-
 
 
     private void initView() {
@@ -426,5 +421,7 @@ public class ViewDetailsActivity extends AppCompatActivity {
         btnSB = (ToggleButton) findViewById(R.id.btnSB);
         btnSF = (ToggleButton) findViewById(R.id.btnSF);
         JoinRoomBtn = (Button) findViewById(R.id.creatRoom_btn);
+        max = findViewById(R.id.max);
+        creatRoomBtn = findViewById(R.id.creatRoom_btn);
     }
 }

@@ -41,15 +41,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
 
         //탭 메뉴 추가
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_home).setText("먹자홈"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_search_x).setText("골라먹자"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage).setText("마이먹자"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.web_crawler).setText("긁어먹자"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_mypage).setText("먹자채팅"));
         //Fragment 생성후 컬렉션에 저장
-
-        TabContent1 tabContent1= new TabContent1();
-        fragments.add(tabContent1);
         TabContent2 tabContent2= new TabContent2();
         fragments.add(tabContent2);
         TabContent3 tabContent3= new TabContent3();
@@ -62,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         MyPagerAdapter myPagerAdapter= new MyPagerAdapter(getSupportFragmentManager(),fragments);
         //ViewPager에 PageAdapter를 연결
         viewPager.setAdapter(myPagerAdapter);
-        viewPager.setOffscreenPageLimit(5);
+        viewPager.setOffscreenPageLimit(2);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         //리스너 설정

@@ -17,13 +17,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kosmo.mukja.R;
 import com.kosmo.mukja.content.TabContent2;
 import com.kosmo.mukja.storeinfo.Store_infoActivity;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,6 +41,11 @@ import java.util.ArrayList;
 public class ERAdapter extends BaseAdapter {
     private ArrayList<ERItem> mItems = new ArrayList<>();
     private ArrayList<String> erjoin_num_List = new ArrayList<>();
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference=firebaseDatabase.getReference();
+    private static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
+    private static final String SERVER_KEY = "AAAA5H8D1I0:APA91bGPoVtK3F4TgPFwS0tQVhJyjOy3ahaafxUbzFY8N2VIjmaHMLdyVnET-3ZSrvgD_rUuafFhLgQFQTtaCyas8yoe7ydoYRsXEktdQ5GdXRtprguoR14tpPUh-AMaLMXtoKpE_O1d";
+
     public ERAdapter(){
     }
 
@@ -129,6 +144,7 @@ public class ERAdapter extends BaseAdapter {
         erItem.setEr_title(er_title);
         erItem.setEr_postdate(er_postdate);
         erItem.setUser_id(user_id);
+        Log.i("가즈아","이거다!눈뜨고봐라"+user_id);
         erItem.setErjoin_num(erjoin_num);
         erItem.setU_nick(u_nick);
         erItem.setU_tend(u_tend);
@@ -217,5 +233,66 @@ public class ERAdapter extends BaseAdapter {
 
         }
     }///////////////AsyncTask
+
+//    private void fcm(){
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                String[] keys = master.split("@");
+//                Log.i("가즈아", "1:" + keys[0]);
+//                String tokens = snapshot.getValue().toString();
+//                Log.i("가즈아", "토큰:" + tokens);
+//                if (tokens.indexOf(keys[0]) != -1) {
+//                    Log.i("가즈아", "2:있다");
+//                    String[] tokena = tokens.split(",");
+//                    for (int i = 0; i < tokena.length; i++) {
+//                        String token = tokena[i];
+//                        if (token.indexOf(keys[0]) != -1) {
+//                            String[] t = token.split("=");
+//                            userToken=t[1];
+//                        }
+//                    }
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                // FMC 메시지 생성 start
+//                                JSONObject root = new JSONObject();
+//                                JSONObject notification = new JSONObject();
+//                                notification.put("body", userName+"님이 모임에 참여신청하였습니다.");
+//                                notification.put("title", getString(R.string.app_name));
+//                                root.put("notification", notification);
+//                                Log.i("가즈아",userToken);
+//                                root.put("to", userToken);
+//                                // FMC 메시지 생성 end
+//                                URL Url = new URL(FCM_MESSAGE_URL);
+//                                HttpURLConnection conn = (HttpURLConnection) Url.openConnection();
+//                                conn.setRequestMethod("POST");
+//                                conn.setDoOutput(true);
+//                                conn.setDoInput(true);
+//                                conn.addRequestProperty("Authorization", "key=" + SERVER_KEY);
+//                                conn.setRequestProperty("Accept", "application/json");
+//                                conn.setRequestProperty("Content-type", "application/json");
+//                                OutputStream os = conn.getOutputStream();
+//                                os.write(root.toString().getBytes("utf-8"));
+//                                os.flush();
+//                                conn.getResponseCode();
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }).start();
+//
+//
+//
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
+
 
 }
