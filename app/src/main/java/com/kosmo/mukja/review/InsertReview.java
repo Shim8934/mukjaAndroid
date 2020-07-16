@@ -16,9 +16,12 @@ import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,9 +37,17 @@ import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.kosmo.mukja.R;
 import com.kosmo.mukja.content.TabContent2;
+import com.kosmo.mukja.mypage.MyReview;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
 import gun0912.tedbottompicker.TedBottomPicker;
 
 public class InsertReview extends AppCompatActivity {
@@ -55,7 +66,10 @@ public class InsertReview extends AppCompatActivity {
     private String title;
     private String content;
     private  String root = Environment.getExternalStorageDirectory().getAbsolutePath();
-
+    private  List menuno_list = new Vector();
+    private List<String> spinnerArray =  new ArrayList<String>();
+    private String selectedMenuNo;
+    private Spinner menuSpinner;
     public static Uri getUriFromPath(ContentResolver cr, String path) {
         Uri fileUri = Uri.parse(path);
         String filePath = fileUri.getPath();
@@ -91,6 +105,10 @@ public class InsertReview extends AppCompatActivity {
         requestManager = Glide.with(this);
         setSingleShowButton();
 
+
+        new GetReviewMenuList().execute("http://"+ TabContent2.ipAddr +"/mukja/Android/getreviewmenulist.do",store_id);
+
+
         reviewWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +124,93 @@ public class InsertReview extends AppCompatActivity {
             }
         });
     }//onCreate
+    private class GetReviewMenuList extends AsyncTask<String,Void,String> {
+        private AlertDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            //프로그래스바용 다이얼로그 생성]
+            //빌더 생성 및 다이얼로그창 설정
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setCancelable(false);
+            builder.setView(R.xml.progress);
+            builder.setMessage("매뉴 불러오는 중");
 
+            //빌더로 다이얼로그창 생성
+            progressDialog = builder.create();
+            progressDialog.show();
+
+        }///////////onPreExecute
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.i("MyMarker","요청주소:"+String.format("%s?store_id=%s",params[0],params[1]));
+            StringBuffer buf = new StringBuffer();
+
+            try {
+                URL url = new URL(String.format("%s?store_id=%s",params[0],params[1]));
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                //서버에 요청 및 응답코드 받기
+                int responseCode=conn.getResponseCode();
+                if(responseCode ==HttpURLConnection.HTTP_OK){
+                    //연결된 커넥션에서 서버에서 보낸 데이타 읽기
+                    BufferedReader br =
+                            new BufferedReader(
+                                    new InputStreamReader(conn.getInputStream(),"UTF-8"));
+                    String line;
+                    while((line=br.readLine())!=null){
+                        buf.append(line);
+                    }
+                    br.close();
+                }
+            }
+            catch(Exception e){e.printStackTrace();}
+
+            SystemClock.sleep(2000);
+            return buf.toString();
+        }///////////doInBackground
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            JsonParser jsonParser = new JsonParser();
+            JsonArray review = (JsonArray) jsonParser.parse(result);
+            Log.i("MyMarker","매뉴result"+review.toString());
+            Log.i("MyMarker","매뉴result size:"+review.size());
+
+            for(int i=0; i<review.size();i++){
+                String menu = review.get(i).getAsJsonObject().get("menuName").toString().replaceAll("\"","");
+                spinnerArray.add(menu);
+                String menuNo =review.get(i).getAsJsonObject().get("menuNo").toString().replaceAll("\"","");
+                menuno_list.add(menuNo);
+            }
+
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    InsertReview.this, android.R.layout.simple_spinner_item, spinnerArray);
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            menuSpinner = (Spinner) findViewById(R.id.menuSpinner);
+            menuSpinner.setAdapter(adapter);
+            menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override   // position 으로 몇번째 것이 선택됬는지 값을 넘겨준다
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    selectedMenuNo=menuno_list.get(position).toString();
+                    Toast.makeText(InsertReview.this,spinnerArray.get(position)+"를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    Toast.makeText(InsertReview.this,"아무것도 선택되지 않았습니다",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
+            //다이얼로그 닫기
+            if(progressDialog!=null && progressDialog.isShowing())
+                progressDialog.dismiss();
+        }
+    }///////////////AsyncTask
     private void setSingleShowButton() {
         TextView btnSingleShow = findViewById(R.id.btn_single_show);
         btnSingleShow.setOnClickListener(view -> {
@@ -172,7 +276,7 @@ public class InsertReview extends AppCompatActivity {
 
         @Override
         protected  List<String> doInBackground(String... params) {
-            String serverURL="http://"+ TabContent2.ipAddr +"/mukja/Android/insertReview.do";
+            String serverURL="http://"+ TabContent2.ipAddr +"/mukja/Android/insertReview.do?menu_no="+selectedMenuNo;
             List<String> result = uploadMedia(selectedUri.getPath(),serverURL);
 
         return result;
@@ -181,13 +285,13 @@ public class InsertReview extends AppCompatActivity {
         @Override
         protected void onPostExecute( List<String> result) {
 
-            for(String item:result){
 
-                Log.i("MyMarker","사진업result"+item);
+        Log.i("MyMarker","사진업result"+result.toString());
 
-            }
-
-
+            Intent insertReviewIntent = new Intent(context, StroeReview.class);
+            insertReviewIntent.putExtra("store_id",store_id);
+            startActivity(insertReviewIntent);
+            finish();
 
 
 
