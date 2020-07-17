@@ -564,6 +564,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="#E3E3E3" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_boder_radius"
+            android:text="수정완료"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="30dp"
+            />
 
 
 
