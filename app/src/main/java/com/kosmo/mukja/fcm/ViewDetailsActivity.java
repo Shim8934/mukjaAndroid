@@ -295,7 +295,11 @@ public class ViewDetailsActivity extends AppCompatActivity {
                                                         String token = tokena[i];
                                                         if (token.indexOf(keys[0]) != -1) {
                                                             String[] t = token.split("=");
-                                                            userToken = t[1];
+                                                            if(t[1].indexOf("}")!=-1){
+                                                                userToken = t[1].replaceAll("}","");
+                                                            }else {
+                                                                userToken = t[1];
+                                                            }
                                                         }
                                                     }
                                                     new Thread(new Runnable() {

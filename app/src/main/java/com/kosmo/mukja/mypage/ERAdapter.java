@@ -2,6 +2,7 @@ package com.kosmo.mukja.mypage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.AsyncTask;
@@ -37,6 +38,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class ERAdapter extends BaseAdapter {
     private ArrayList<ERItem> mItems = new ArrayList<>();
@@ -45,7 +47,9 @@ public class ERAdapter extends BaseAdapter {
     private DatabaseReference databaseReference=firebaseDatabase.getReference();
     private static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
     private static final String SERVER_KEY = "AAAA5H8D1I0:APA91bGPoVtK3F4TgPFwS0tQVhJyjOy3ahaafxUbzFY8N2VIjmaHMLdyVnET-3ZSrvgD_rUuafFhLgQFQTtaCyas8yoe7ydoYRsXEktdQ5GdXRtprguoR14tpPUh-AMaLMXtoKpE_O1d";
-
+    private String users;
+    private String userToken;
+    private String userName;
     public ERAdapter(){
     }
 
@@ -87,16 +91,14 @@ public class ERAdapter extends BaseAdapter {
         TextView er_accept = convertView.findViewById(R.id.er_accept) ;
         TextView er_reject = convertView.findViewById(R.id.er_reject) ;
 
-
+        SharedPreferences preferences = context.getSharedPreferences("loginInfo", context.MODE_PRIVATE);
+        userName = preferences.getString("username", null);
         Log.i("MyMarker","어뎁터 아이템 길이:"+mItems.size());
 
 
         if(mItems.get(position).getU_img().length()!=0){
             Picasso.get().load(mItems.get(position).getU_img()).into(er_userimg);
         }
-
-
-
         er_title.setText( mItems.get(position).getEr_title());
         er_storename.setText( mItems.get(position).getStore_name());
         er_postdate.setText( mItems.get(position).getEr_postdate());
@@ -113,7 +115,7 @@ public class ERAdapter extends BaseAdapter {
         er_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("MyMarker"," 클릭시 발생 erjoin_num:"+ erjoin_num_List.get(position));
+                Log.i("가즈아"," 클릭시 발생 erjoin_num:"+ erjoin_num_List.get(position));
                 new RequestER_Accept().execute("http://"+ TabContent2.ipAddr +"/mukja/Android/AndroidRequestER_Accept.do",erjoin_num_List.get(position));
                 Toast.makeText(context, "수락하였습니다!", Toast.LENGTH_SHORT).show();
                 mItems.remove(position);
@@ -144,7 +146,6 @@ public class ERAdapter extends BaseAdapter {
         erItem.setEr_title(er_title);
         erItem.setEr_postdate(er_postdate);
         erItem.setUser_id(user_id);
-        Log.i("가즈아","이거다!눈뜨고봐라"+user_id);
         erItem.setErjoin_num(erjoin_num);
         erItem.setU_nick(u_nick);
         erItem.setU_tend(u_tend);
@@ -160,7 +161,7 @@ public class ERAdapter extends BaseAdapter {
 
         @Override
         protected String doInBackground(String... params) {
-            Log.i("MyMarker","요청주소:"+String.format("%s?erjoin_num=%s",params[0],params[1]));
+            Log.i("MyMarker","요청주소:"+String.format("%s?`erjoin_num`=%s",params[0],params[1]));
             StringBuffer buf = new StringBuffer();
 
             try {
@@ -190,7 +191,10 @@ public class ERAdapter extends BaseAdapter {
         protected void onPostExecute(String result) {
 
             Log.i("MyMarker","참가 수락result:"+result);
-
+            if(result.indexOf("1")!=-1){
+                Log.i("가즈아","1");
+                fcm();
+            }
         }
     }///////////////AsyncTask
 
@@ -234,65 +238,66 @@ public class ERAdapter extends BaseAdapter {
         }
     }///////////////AsyncTask
 
-//    private void fcm(){
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                String[] keys = master.split("@");
-//                Log.i("가즈아", "1:" + keys[0]);
-//                String tokens = snapshot.getValue().toString();
-//                Log.i("가즈아", "토큰:" + tokens);
-//                if (tokens.indexOf(keys[0]) != -1) {
-//                    Log.i("가즈아", "2:있다");
-//                    String[] tokena = tokens.split(",");
-//                    for (int i = 0; i < tokena.length; i++) {
-//                        String token = tokena[i];
-//                        if (token.indexOf(keys[0]) != -1) {
-//                            String[] t = token.split("=");
-//                            userToken=t[1];
-//                        }
-//                    }
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                // FMC 메시지 생성 start
-//                                JSONObject root = new JSONObject();
-//                                JSONObject notification = new JSONObject();
-//                                notification.put("body", userName+"님이 모임에 참여신청하였습니다.");
-//                                notification.put("title", getString(R.string.app_name));
-//                                root.put("notification", notification);
-//                                Log.i("가즈아",userToken);
-//                                root.put("to", userToken);
-//                                // FMC 메시지 생성 end
-//                                URL Url = new URL(FCM_MESSAGE_URL);
-//                                HttpURLConnection conn = (HttpURLConnection) Url.openConnection();
-//                                conn.setRequestMethod("POST");
-//                                conn.setDoOutput(true);
-//                                conn.setDoInput(true);
-//                                conn.addRequestProperty("Authorization", "key=" + SERVER_KEY);
-//                                conn.setRequestProperty("Accept", "application/json");
-//                                conn.setRequestProperty("Content-type", "application/json");
-//                                OutputStream os = conn.getOutputStream();
-//                                os.write(root.toString().getBytes("utf-8"));
-//                                os.flush();
-//                                conn.getResponseCode();
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }).start();
-//
-//
-//
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+    private void fcm(){
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i("가즈아","아이디:");
+                String[] keys = users.split("@");
+                Log.i("가즈아", "1:" + keys[0]);
+                String tokens = snapshot.getValue().toString();
+                Log.i("가즈아", "토큰:" + tokens);
+                if (tokens.indexOf(keys[0]) != -1) {
+                    Log.i("가즈아", "2:있다");
+                    String[] tokena = tokens.split(",");
+                    for (int i = 0; i < tokena.length; i++) {
+                        String token = tokena[i];
+                        if (token.indexOf(keys[0]) != -1) {
+                            String[] t = token.split("=");
+                            userToken=t[1];
+                        }
+                    }
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                // FMC 메시지 생성 start
+                                JSONObject root = new JSONObject();
+                                JSONObject notification = new JSONObject();
+                                notification.put("body", userName+"님이 수락하였습니다.");
+                                notification.put("title", "골라먹자");
+                                root.put("notification", notification);
+                                Log.i("가즈아",userToken);
+                                root.put("to", userToken);
+                                // FMC 메시지 생성 end
+                                URL Url = new URL(FCM_MESSAGE_URL);
+                                HttpURLConnection conn = (HttpURLConnection) Url.openConnection();
+                                conn.setRequestMethod("POST");
+                                conn.setDoOutput(true);
+                                conn.setDoInput(true);
+                                conn.addRequestProperty("Authorization", "key=" + SERVER_KEY);
+                                conn.setRequestProperty("Accept", "application/json");
+                                conn.setRequestProperty("Content-type", "application/json");
+                                OutputStream os = conn.getOutputStream();
+                                os.write(root.toString().getBytes("utf-8"));
+                                os.flush();
+                                conn.getResponseCode();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+
+
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
 }
