@@ -168,7 +168,7 @@ public class TabContent3 extends Fragment {
                 userProfile.setClipToOutline(true);
             }
 
-            Picasso.get().load("http://"+TabContent2.ipAddr+":9998/mukja"+imgPath).into(userProfile);
+            Picasso.get().load("http://"+TabContent2.ipAddr+"/mukja"+imgPath).into(userProfile);
 
 
         }
