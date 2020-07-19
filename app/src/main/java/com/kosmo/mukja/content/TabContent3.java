@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -168,7 +169,12 @@ public class TabContent3 extends Fragment {
                 userProfile.setClipToOutline(true);
             }
 
-            Picasso.get().load("http://"+TabContent2.ipAddr+"/mukja"+imgPath).into(userProfile);
+            if(imgPath.indexOf("http:")!=-1){
+                Picasso.get().load(Uri.parse(imgPath)).into(userProfile);
+            }else{
+                Picasso.get().load("http://"+TabContent2.ipAddr+"/mukja"+imgPath).into(userProfile);
+            }
+
 
 
         }

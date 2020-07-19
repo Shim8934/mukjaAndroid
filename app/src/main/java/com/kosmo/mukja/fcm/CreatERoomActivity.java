@@ -328,7 +328,8 @@ public class CreatERoomActivity extends AppCompatActivity {
                         return;
                     }
                 }
-//                intent.putExtra("title", titles);
+                SharedPreferences preferences = getSharedPreferences("loginInfo",MODE_PRIVATE);
+                intent.putExtra("img", preferences.getString("img",null));
 //                intent.putExtra("content", contents);
 //                intent.putExtra("horizontalCounter", horizontalCounters);
 //                intent.putExtra("datePicker", datePickers);

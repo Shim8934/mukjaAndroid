@@ -157,8 +157,13 @@ public class ViewDetailsActivity extends AppCompatActivity {
         String[] dateArray = dateAll.split("일");
         String dates = dateArray[0] + "일";
         String times = dateArray[1].trim();
+        Log.i("가즈아",intent.getStringExtra("img"));
+        if(intent.getStringExtra("img").indexOf("http:")!=-1){
+            Picasso.get().load(Uri.parse(intent.getStringExtra("img"))).into(Profile);
+        }else{
+            Picasso.get().load(Uri.parse("http://115.91.88.230:9998/mukja" + intent.getStringExtra("img"))).into(Profile);
+        }
 
-        Picasso.get().load(Uri.parse("http://115.91.88.230:9998/mukja" + intent.getStringExtra("img"))).into(Profile);
         Profile.setBackground(new ShapeDrawable(new OvalShape()));
         if (Build.VERSION.SDK_INT >= 21) {
             Profile.setClipToOutline(true);
